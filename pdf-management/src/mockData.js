@@ -31,6 +31,17 @@ const reports = [
 						fields: ['test1', 'test2', 'test3']
 					}
 				]
+			},
+			{
+				id: 'TEST2',
+				title: 'מקטע 2',
+				fields: [
+					{
+						id: 'TEST_FIELD1',
+						name: 'בדיקה 1',
+						type: 'text'
+					}
+				]
 			}
 		]
 	},
