@@ -22,7 +22,7 @@ const FIELD_TO_COMPONENT = {
 };
 
 function Field(props) {
-	let { type, ...fieldProps } = props.data;
+	let { type, ...fieldProps } = props.field;
 
 	let CurrentField = FIELD_TO_COMPONENT[type];
 
@@ -30,7 +30,11 @@ function Field(props) {
 
 	return (
 		<div className='field'>
-			<CurrentField {...fieldProps} />
+			<CurrentField
+				{...fieldProps}
+				onChangeData={props.onChangeData}
+				data={props.data}
+			/>
 		</div>
 	);
 }

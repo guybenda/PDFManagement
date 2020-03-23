@@ -6,18 +6,34 @@ import {} from '@material-ui/icons';
 
 import './SelectField.css';
 
-function SelectField(props) {
-	return (
-		<Autocomplete
-			id={props.id}
-			options={props.values}
-			getOptionLabel={option => option}
-			//style={{ width: 300 }}
-			renderInput={params => (
-				<TextField {...params} label={props.name} variant='outlined' />
-			)}
-		/>
-	);
+class SelectField extends React.Component {
+	componentDidMount() {
+		this.props.onChangeData('');
+	}
+
+	handleChange = e => {
+		this.props.onChangeData(e.target.value);
+	};
+
+	render() {
+		return (
+			<Autocomplete
+				id={this.props.id}
+				options={this.props.values}
+				getOptionLabel={option => option}
+				//style={{ width: 300 }}
+				renderInput={params => (
+					<TextField
+						{...params}
+						label={this.props.name}
+						variant='outlined'
+					/>
+				)}
+				value={this.props.value}
+				onChange={this.handleChange}
+			/>
+		);
+	}
 }
 
 export default SelectField;

@@ -13,14 +13,26 @@ import './Section.css';
 
 function Section(props) {
 	return (
-		<ExpansionPanel defaultExpanded key={props.section.id}>
+		<ExpansionPanel
+			className='section'
+			defaultExpanded
+			key={props.section.id}
+		>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
 				<div className='section-title'>{props.section.title}</div>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<div className='section-contents'>
 					{props.section.fields.map(field => (
-						<Field key={field.id} data={field} />
+						<Field
+							key={field.id}
+							field={field}
+							data={props.data[field.id]}
+							onChangeData={props.onChangeData(
+								props.section.id,
+								field.id
+							)}
+						/>
 					))}
 				</div>
 			</ExpansionPanelDetails>

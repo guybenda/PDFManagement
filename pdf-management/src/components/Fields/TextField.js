@@ -5,12 +5,26 @@ import {} from '@material-ui/icons';
 
 import './TextField.css';
 
-function TextField(props) {
-	return (
-		<>
-			<MuiTextField id={props.id} label={props.name} variant='outlined' />
-		</>
-	);
+class TextField extends React.Component {
+	componentDidMount() {
+		this.props.onChangeData('');
+	}
+
+	handleChange = e => {
+		this.props.onChangeData(e.target.value);
+	};
+
+	render() {
+		return (
+			<MuiTextField
+				id={this.props.id}
+				label={this.props.name}
+				variant='outlined'
+				value={this.props.value}
+				onChange={this.handleChange}
+			/>
+		);
+	}
 }
 
 export default TextField;
