@@ -7,20 +7,22 @@ import {
 } from '@material-ui/core';
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 
+import Field from './Field';
+
 import './Section.css';
 
 function Section(props) {
-	const renderSectionContent = section => {
-		return <div></div>; // TODO: Generate fields based on type
-	};
-
 	return (
 		<ExpansionPanel defaultExpanded key={props.section.id}>
 			<ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
 				<div className='section-title'>{props.section.title}</div>
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
-				{renderSectionContent(props.section)}
+				<div className='section-contents'>
+					{props.section.fields.map(field => (
+						<Field key={field.id} data={field} />
+					))}
+				</div>
 			</ExpansionPanelDetails>
 		</ExpansionPanel>
 	);

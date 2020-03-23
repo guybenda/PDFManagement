@@ -19,7 +19,7 @@ class ReportForm extends React.Component {
 				{report => (
 					<Container maxWidth='lg' className='report-form-container'>
 						<h1>{report.name}</h1>
-						{this.renderForm(report)}
+						<form>{this.renderForm(report)}</form>
 					</Container>
 				)}
 			</ReportContext.Consumer>

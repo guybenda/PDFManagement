@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.7",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.46",
     "@react-pdf/renderer": "^1.6.8",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -15,7 +16,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-pdf": "^4.1.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "react-sortable-hoc": "^1.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
