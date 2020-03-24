@@ -1,14 +1,6 @@
 import React from 'react';
 
-import {
-	TableContainer,
-	Table,
-	TableBody,
-	Paper,
-	TextField,
-	Button
-} from '@material-ui/core';
-import { Add as AddIcon } from '@material-ui/icons';
+import { TableContainer, Table, TableBody, Paper } from '@material-ui/core';
 import { SortableContainer } from 'react-sortable-hoc';
 
 import DraggableTableRow from './DraggableTableRow';
@@ -25,8 +17,8 @@ const arrayMove = (arr, fromIndex, toIndex) => {
 	return newArray;
 };
 
-const SortableTable = SortableContainer(({ children, component }) => {
-	return <TableBody component={component}>{children}</TableBody>;
+const SortableTable = SortableContainer(({ children }) => {
+	return <TableBody>{children}</TableBody>;
 });
 
 class DynamicTableField extends React.Component {
@@ -72,19 +64,16 @@ class DynamicTableField extends React.Component {
 
 	render() {
 		return (
-			<TableContainer component={Paper}>
-				<Table component='div' className='table-dynamic'>
+			<TableContainer className='table-container' component={Paper}>
+				<Table className='table-dynamic' size='small'>
 					<Tableheader
 						columns={this.props.fields}
 						onAdd={this.onAddRow}
-						component='div'
-						rowComponent='div'
-						cellComponent='div'
 					/>
 					<SortableTable
 						onSortEnd={this.onSortEnd}
 						useDragHandle
-						component='div'
+						lockAxis='y'
 					>
 						{this.props.data &&
 							this.props.data.map((row, index) => (
@@ -95,8 +84,6 @@ class DynamicTableField extends React.Component {
 									data={this.props.data[index]}
 									onChangeData={this.handleReorder}
 									onDelete={this.onDelete(index)}
-									rowComponent='div'
-									cellComponent='div'
 								/>
 							))}
 					</SortableTable>

@@ -1,5 +1,7 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
 
 import ReportContext from '../ReportContext';
 import Section from './Section';
@@ -63,7 +65,9 @@ class ReportForm extends React.Component {
 				{report => (
 					<Container maxWidth='lg' className='report-form-container'>
 						<h1>{report.name}</h1>
-						<form>{this.renderForm(report)}</form>
+						<MuiPickersUtilsProvider utils={MomentUtils}>
+							<form>{this.renderForm(report)}</form>
+						</MuiPickersUtilsProvider>
 					</Container>
 				)}
 			</ReportContext.Consumer>

@@ -3,3 +3,12 @@
 	justify-content: center;
 	align-items: center;
 }
+
+.table-cell-drag,
+.table-cell-delete {
+	width: 1rem;
+}
+
+.table-row-delete-icon:hover {
+	color: #000000c0;
+}

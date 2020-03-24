@@ -46,18 +46,21 @@ const reports = [
 							{
 								id: 'TEST_FIELD10',
 								name: 'בדיקה 1',
+								weight: 3,
 								type: 'TEXT'
 							},
 							{
 								id: 'TEST_FIELD20',
 								name: 'בדיקה 2',
+								weight: 1,
 								type: 'SELECT',
 								values: SELECT_TEST
 							},
 							{
 								id: 'TEST_FIELD30',
 								name: 'בדיקה 3',
-								type: 'TEXT'
+								weight: 1,
+								type: 'DATE'
 							}
 						]
 					}

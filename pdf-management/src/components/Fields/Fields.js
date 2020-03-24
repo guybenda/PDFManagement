@@ -4,6 +4,8 @@ import StaticTableField from './StaticTableField';
 import TextField from './TextField';
 import Divider from './Divider';
 import Label from './Label';
+import NumberField from './NumberField';
+import DateField from './DateField';
 
 export {
 	DynamicTableField,
@@ -11,7 +13,9 @@ export {
 	StaticTableField,
 	TextField,
 	Divider,
-	Label
+	Label,
+	NumberField,
+	DateField
 };
 
 export const FIELD_TO_COMPONENT = {
@@ -20,7 +24,9 @@ export const FIELD_TO_COMPONENT = {
 	TABLE_DYNAMIC: DynamicTableField,
 	TABLE_STATIC: StaticTableField,
 	DIVIDER: Divider,
-	LABEL: Label
+	LABEL: Label,
+	NUMBER: NumberField,
+	DATE: DateField
 };
 
 export const FULL_WIDTH_FIELDS = [

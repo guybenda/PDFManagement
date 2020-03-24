@@ -19,11 +19,12 @@ function Field(props) {
 		: 'field';
 
 	return (
-		<div className={classes}>
+		<div className={props.noMargin ? '' : classes}>
 			<CurrentField
 				{...fieldProps}
 				onChangeData={props.onChangeData}
 				data={props.data}
+				noMargin={props.noMargin}
 			/>
 		</div>
 	);

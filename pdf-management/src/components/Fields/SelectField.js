@@ -8,11 +8,13 @@ import './SelectField.css';
 
 class SelectField extends React.Component {
 	componentDidMount() {
-		this.props.onChangeData('');
+		if (!this.props.value) {
+			this.props.onChangeData('');
+		}
 	}
 
 	handleChange = e => {
-		this.props.onChangeData(e.target.value);
+		this.props.onChangeData(e.target.textContent);
 	};
 
 	render() {
@@ -25,8 +27,8 @@ class SelectField extends React.Component {
 				renderInput={params => (
 					<TextField
 						{...params}
-						label={this.props.name}
-						variant='outlined'
+						label={this.props.noMargin ? '' : this.props.name}
+						variant={this.props.noMargin ? 'standard' : 'outlined'}
 					/>
 				)}
 				value={this.props.value}

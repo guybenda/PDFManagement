@@ -5,7 +5,7 @@ import {} from '@material-ui/icons';
 
 import './TextField.css';
 
-class TextField extends React.Component {
+class NumberField extends React.Component {
 	componentDidMount() {
 		if (!this.props.value) {
 			this.props.onChangeData('');
@@ -19,7 +19,9 @@ class TextField extends React.Component {
 	render() {
 		return (
 			<MuiTextField
+				type='number'
 				fullWidth
+				id={this.props.id}
 				label={this.props.noMargin ? '' : this.props.name}
 				variant={this.props.noMargin ? 'standard' : 'outlined'}
 				value={this.props.data || ''}
@@ -29,4 +31,4 @@ class TextField extends React.Component {
 	}
 }
 
-export default TextField;
+export default NumberField;

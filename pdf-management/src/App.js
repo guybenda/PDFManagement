@@ -5,6 +5,10 @@ import Header from './components/Header';
 import ReportForm from './components/ReportForm';
 
 import { reports } from './mockData.js';
+import moment from 'moment';
+import 'moment/locale/he';
+
+moment.locale('he');
 
 function App() {
 	return (

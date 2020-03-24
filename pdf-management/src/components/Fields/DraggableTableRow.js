@@ -1,53 +1,66 @@
 import React from 'react';
 
-import { TableRow, TableCell, TextField, Button } from '@material-ui/core';
+import { TableRow, TableCell } from '@material-ui/core';
 import {
 	DragHandle as DragHandleIcon,
 	Delete as DeleteIcon
 } from '@material-ui/icons';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 
+import Field from '../Field';
+
 import './DraggableTableRow.css';
 
-const DragHandle = SortableHandle(({ cellComponent }) => (
-	<TableCell component={cellComponent}>
-		<DragHandleIcon />
+const DragHandle = SortableHandle(() => (
+	<TableCell className='table-cell-drag'>
+		<div className='table-row-drag-handle'>
+			<DragHandleIcon />
+		</div>
 	</TableCell>
 ));
 
-const SortableRow = SortableElement(
-	({ value, onDelete, rowComponent, cellComponent }) => (
-		<TableRow component={rowComponent}>
-			{value}
-			<DragHandle cellComponent={cellComponent} />
-			<TableCell component={cellComponent}>
-				<DeleteIcon onClick={onDelete} />
-			</TableCell>
-		</TableRow>
-	)
-);
+const SortableRow = SortableElement(({ value, onDelete }) => (
+	<TableRow>
+		{value}
+		<DragHandle />
+		<TableCell className='table-cell-delete'>
+			<div className='table-row-drag-handle'>
+				<DeleteIcon
+					className='table-row-delete-icon'
+					onClick={onDelete}
+				/>
+			</div>
+		</TableCell>
+	</TableRow>
+));
 
 class DraggableTableRow extends React.Component {
-	handleChange = id => e => {
-		this.props.onChangeData(this.props.index, id, e.target.value);
+	handleChange = id => value => {
+		this.props.onChangeData(this.props.index, id, value);
 	};
 
 	render() {
+		let totalWeight = this.props.columns.reduce(
+			(sum, curr) => sum + +curr.weight,
+			0
+		);
+
 		return (
 			<SortableRow
 				index={this.props.index}
 				onDelete={this.props.onDelete}
-				rowComponent={this.props.rowComponent}
-				cellComponent={this.props.cellComponent}
 				value={this.props.columns.map(cell => (
 					<TableCell
 						key={cell.id}
-						component={this.props.cellComponent}
+						style={{
+							width: `${100 * (cell.weight / totalWeight)}%`
+						}}
 					>
-						<TextField
-							value={this.props.data[cell.id]}
-							onChange={this.handleChange(cell.id)}
-							fullWidth
+						<Field
+							field={cell}
+							data={this.props.data[cell.id]}
+							onChangeData={this.handleChange(cell.id)}
+							noMargin
 						/>
 					</TableCell>
 				))}
