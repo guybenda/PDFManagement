@@ -3,23 +3,25 @@ import { Container } from '@material-ui/core';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 
-import ReportContext from '../ReportContext';
 import Section from './Section';
+import Header from './Header';
+
+import { reports } from '../mockData.js';
 
 import './ReportForm.css';
 
 class ReportForm extends React.Component {
 	state = {
+		report: null,
 		data: null
 	};
 
-	/*componentDidUpdate() {
-		console.log('UPDATE!!!');
-	}*/
-
 	componentDidMount() {
+		let { reportID } = this.props.match.params;
+		let report = reports.find(report => report.id === +reportID);
+
 		// Create empty data structure for every field
-		let data = this.context.sections.reduce(
+		let data = report.sections.reduce(
 			(allSections, section) =>
 				(allSections = {
 					...allSections,
@@ -32,7 +34,7 @@ class ReportForm extends React.Component {
 			{}
 		);
 
-		this.setState({ data });
+		this.setState({ data, report });
 	}
 
 	onChangeData = (section, field) => value => {
@@ -60,21 +62,20 @@ class ReportForm extends React.Component {
 	}
 
 	render() {
+		if (!this.state.report) return null;
+
 		return (
-			<ReportContext.Consumer>
-				{report => (
-					<Container maxWidth='lg' className='report-form-container'>
-						<h1>{report.name}</h1>
-						<MuiPickersUtilsProvider utils={MomentUtils}>
-							<form>{this.renderForm(report)}</form>
-						</MuiPickersUtilsProvider>
-					</Container>
-				)}
-			</ReportContext.Consumer>
+			<>
+				<Header report={this.state.report} />
+				<Container maxWidth='lg' className='report-form-container'>
+					<h1>{this.state.report.name}</h1>
+					<MuiPickersUtilsProvider utils={MomentUtils}>
+						<form>{this.renderForm(this.state.report)}</form>
+					</MuiPickersUtilsProvider>
+				</Container>
+			</>
 		);
 	}
 }
-
-ReportForm.contextType = ReportContext;
 
 export default ReportForm;

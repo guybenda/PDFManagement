@@ -1,12 +1,62 @@
 import React from 'react';
 
-import {} from '@material-ui/core';
+import /*
+	TableContainer,
+	Table,
+	TableHead,
+	TableRow,
+	TableCell,
+	TableBody,
+	Paper*/
+'@material-ui/core';
 import {} from '@material-ui/icons';
 
 import './StaticTableField.css';
 
-function StaticTableField(props) {
-	return <div>{props.children}</div>; // TODO
+class StaticTableField extends React.Component {
+	componentDidMount() {
+		if (!this.props.data) {
+			this.props.onChangeData([this.createRow()]);
+		}
+	}
+
+	render() {
+		return null; /*(
+			<TableContainer component={Paper}>
+				<Table className={classes.table} aria-label='simple table'>
+					<TableHead>
+						<TableRow>
+							<TableCell>Dessert (100g serving)</TableCell>
+							<TableCell align='right'>Calories</TableCell>
+							<TableCell align='right'>Fat&nbsp;(g)</TableCell>
+							<TableCell align='right'>Carbs&nbsp;(g)</TableCell>
+							<TableCell align='right'>
+								Protein&nbsp;(g)
+							</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						
+						{rows.map(row => (
+							<TableRow key={row.name}>
+								<TableCell component='th' scope='row'>
+									{row.name}
+								</TableCell>
+								<TableCell align='right'>
+									{row.calories}
+								</TableCell>
+								<TableCell align='right'>{row.fat}</TableCell>
+								<TableCell align='right'>{row.carbs}</TableCell>
+								<TableCell align='right'>
+									{row.protein}
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			</TableContainer>
+		);*/ // TODO
+	}
 }
 
 export default StaticTableField;

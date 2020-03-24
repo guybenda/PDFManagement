@@ -2,7 +2,6 @@ import React from 'react';
 import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 
-import ReportContext from '../ReportContext.js';
 import './Header.css';
 
 class Header extends React.Component {
@@ -19,7 +18,9 @@ class Header extends React.Component {
 						>
 							<MenuIcon />
 						</IconButton>
-						<div className='header-title'>{this.context.name}</div>
+						<div className='header-title'>
+							{this.props.report.name}
+						</div>
 						<Button color='inherit'>לחצן?</Button>
 					</Toolbar>
 				</AppBar>
@@ -27,7 +28,5 @@ class Header extends React.Component {
 		);
 	}
 }
-
-Header.contextType = ReportContext;
 
 export default Header;
