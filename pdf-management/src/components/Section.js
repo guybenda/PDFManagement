@@ -8,10 +8,39 @@ import {
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 
 import Field from './Field';
+import { FULL_WIDTH_FIELDS } from './Fields/Fields';
 
 import './Section.css';
 
 function Section(props) {
+	let index = 0;
+	const fieldGroups = props.section.fields.reduce((groups, field) => {
+		let fieldComponent = (
+			<Field
+				key={field.id}
+				field={field}
+				data={props.data[field.id]}
+				onChangeData={props.onChangeData(props.section.id, field.id)}
+			/>
+		);
+
+		if (!FULL_WIDTH_FIELDS.includes(field.type)) {
+			if (!groups[index]) groups[index] = [];
+			groups[index].push(fieldComponent);
+		} else {
+			groups[index + 1] = [fieldComponent];
+			index += 2;
+		}
+
+		return groups;
+	}, []);
+
+	const test = fieldGroups.map((group, index) => (
+		<div className='section-group' key={index}>
+			{group}
+		</div>
+	));
+
 	return (
 		<ExpansionPanel
 			className='section'
@@ -23,7 +52,8 @@ function Section(props) {
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<div className='section-contents'>
-					{props.section.fields.map(field => (
+					{
+						test /*props.section.fields.map(field => (
 						<Field
 							key={field.id}
 							field={field}
@@ -33,7 +63,8 @@ function Section(props) {
 								field.id
 							)}
 						/>
-					))}
+							))*/
+					}
 				</div>
 			</ExpansionPanelDetails>
 		</ExpansionPanel>

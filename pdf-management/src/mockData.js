@@ -24,14 +24,19 @@ const reports = [
 						type: 'SELECT',
 						values: SELECT_TEST
 					},
-					/*{
+					{
 						id: 'TEST_DIVIDER',
 						type: 'DIVIDER'
-					},*/
+					},
+					{
+						id: 'TEST_LABEL',
+						name: 'טקסט חופשי',
+						type: 'LABEL'
+					},
 					{
 						id: 'TEST_FIELD3',
 						name: 'בדיקה 3',
-						type: 'TEXT'
+						type: 'NUMBER'
 					},
 					{
 						id: 'TEST_TABLE',

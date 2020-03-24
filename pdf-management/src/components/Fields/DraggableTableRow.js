@@ -7,18 +7,25 @@ import {
 } from '@material-ui/icons';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 
-const DragHandle = SortableHandle(() => (
-	<TableCell>
+import './DraggableTableRow.css';
+
+const DragHandle = SortableHandle(({ cellComponent }) => (
+	<TableCell component={cellComponent}>
 		<DragHandleIcon />
 	</TableCell>
 ));
 
-const SortableRow = SortableElement(({ value }) => (
-	<TableRow>
-		{value}
-		<DragHandle />
-	</TableRow>
-));
+const SortableRow = SortableElement(
+	({ value, onDelete, rowComponent, cellComponent }) => (
+		<TableRow component={rowComponent}>
+			{value}
+			<DragHandle cellComponent={cellComponent} />
+			<TableCell component={cellComponent}>
+				<DeleteIcon onClick={onDelete} />
+			</TableCell>
+		</TableRow>
+	)
+);
 
 class DraggableTableRow extends React.Component {
 	handleChange = id => e => {
@@ -29,11 +36,18 @@ class DraggableTableRow extends React.Component {
 		return (
 			<SortableRow
 				index={this.props.index}
+				onDelete={this.props.onDelete}
+				rowComponent={this.props.rowComponent}
+				cellComponent={this.props.cellComponent}
 				value={this.props.columns.map(cell => (
-					<TableCell key={cell.id}>
+					<TableCell
+						key={cell.id}
+						component={this.props.cellComponent}
+					>
 						<TextField
 							value={this.props.data[cell.id]}
 							onChange={this.handleChange(cell.id)}
+							fullWidth
 						/>
 					</TableCell>
 				))}

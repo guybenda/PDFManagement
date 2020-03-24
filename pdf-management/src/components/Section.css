@@ -1,9 +1,16 @@
 .section-title {
-	font-size: 1.2rem;
+	font-size: 1.33rem;
 	font-weight: 500;
 }
 
 .section-contents {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+}
+
+.section-group {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	justify-items: stretch;
 }

@@ -25,14 +25,14 @@ const arrayMove = (arr, fromIndex, toIndex) => {
 	return newArray;
 };
 
-const SortableTable = SortableContainer(({ children }) => {
-	return <TableBody>{children}</TableBody>;
+const SortableTable = SortableContainer(({ children, component }) => {
+	return <TableBody component={component}>{children}</TableBody>;
 });
 
 class DynamicTableField extends React.Component {
 	componentDidMount() {
 		if (!this.props.data) {
-			this.props.onChangeData([]);
+			this.props.onChangeData([this.createRow()]);
 		}
 	}
 
@@ -49,7 +49,7 @@ class DynamicTableField extends React.Component {
 		this.props.onChangeData(newRows);
 	};
 
-	handleChange = (index, id, value) => {
+	handleReorder = (index, id, value) => {
 		let newRows = [...this.props.data];
 		newRows[index] = { ...newRows[index] };
 
@@ -62,15 +62,30 @@ class DynamicTableField extends React.Component {
 		this.props.onChangeData([...this.props.data, this.createRow()]);
 	};
 
+	onDelete = index => e => {
+		let newRows = [...this.props.data];
+
+		newRows.splice(index, 1);
+
+		this.props.onChangeData(newRows);
+	};
+
 	render() {
 		return (
 			<TableContainer component={Paper}>
-				<Table aria-label='simple table'>
+				<Table component='div' className='table-dynamic'>
 					<Tableheader
 						columns={this.props.fields}
 						onAdd={this.onAddRow}
+						component='div'
+						rowComponent='div'
+						cellComponent='div'
 					/>
-					<SortableTable onSortEnd={this.onSortEnd} useDragHandle>
+					<SortableTable
+						onSortEnd={this.onSortEnd}
+						useDragHandle
+						component='div'
+					>
 						{this.props.data &&
 							this.props.data.map((row, index) => (
 								<DraggableTableRow
@@ -78,7 +93,10 @@ class DynamicTableField extends React.Component {
 									index={index}
 									columns={this.props.fields}
 									data={this.props.data[index]}
-									onChangeData={this.handleChange}
+									onChangeData={this.handleReorder}
+									onDelete={this.onDelete(index)}
+									rowComponent='div'
+									cellComponent='div'
 								/>
 							))}
 					</SortableTable>

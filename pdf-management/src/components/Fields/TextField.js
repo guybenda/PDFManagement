@@ -17,6 +17,7 @@ class TextField extends React.Component {
 	render() {
 		return (
 			<MuiTextField
+				fullWidth
 				id={this.props.id}
 				label={this.props.name}
 				variant='outlined'

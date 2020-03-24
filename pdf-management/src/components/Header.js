@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-	AppBar,
-	Toolbar,
-	IconButton,
-	Typography,
-	Button
-} from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core';
 import { Menu as MenuIcon } from '@material-ui/icons';
 
 import ReportContext from '../ReportContext.js';
@@ -25,9 +19,7 @@ class Header extends React.Component {
 						>
 							<MenuIcon />
 						</IconButton>
-						<Typography variant='h5' className='header-title'>
-							{this.context.name}
-						</Typography>
+						<div className='header-title'>{this.context.name}</div>
 						<Button color='inherit'>לחצן?</Button>
 					</Toolbar>
 				</AppBar>
