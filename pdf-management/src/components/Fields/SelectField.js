@@ -20,7 +20,6 @@ class SelectField extends React.Component {
 	render() {
 		return (
 			<Autocomplete
-				id={this.props.id}
 				options={this.props.values}
 				getOptionLabel={option => option}
 				//style={{ width: 300 }}

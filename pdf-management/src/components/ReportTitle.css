@@ -1,0 +1,9 @@
+.report-title {
+	display: flex;
+	align-items: center;
+}
+
+.report-title-period {
+	margin: 0 1rem;
+	width: 10rem;
+}

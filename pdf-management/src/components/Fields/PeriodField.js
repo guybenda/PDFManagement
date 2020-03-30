@@ -2,11 +2,11 @@ import React from 'react';
 
 import moment from 'moment';
 
-import { KeyboardDatePicker } from '@material-ui/pickers';
+import { DatePicker } from '@material-ui/pickers';
 
 import './TextField.css';
 
-class DateField extends React.Component {
+class PeriodField extends React.Component {
 	componentDidMount() {
 		if (!this.props.value) {
 			this.props.onChangeData(moment());
@@ -19,12 +19,16 @@ class DateField extends React.Component {
 
 	render() {
 		return (
-			<KeyboardDatePicker
+			<DatePicker
 				autoOk
-				disableToolbar
+				//disableToolbar
+				views={['year', 'month']}
+				openTo='month'
 				variant='inline'
-				format='DD/MM/YYYY'
-				InputAdornmentProps={{ position: 'start' }}
+				minDate={this.props.minDate}
+				maxDate={this.props.maxDate}
+				//format='DD/MM/YYYY'
+				//InputAdornmentProps={{ position: 'start' }}
 				fullWidth
 				label={this.props.noMargin ? '' : this.props.name}
 				inputVariant={this.props.noMargin ? 'standard' : 'outlined'}
@@ -35,4 +39,4 @@ class DateField extends React.Component {
 	}
 }
 
-export default DateField;
+export default PeriodField;

@@ -21,7 +21,6 @@ class NumberField extends React.Component {
 			<MuiTextField
 				type='number'
 				fullWidth
-				id={this.props.id}
 				label={this.props.noMargin ? '' : this.props.name}
 				variant={this.props.noMargin ? 'standard' : 'outlined'}
 				value={this.props.data || ''}

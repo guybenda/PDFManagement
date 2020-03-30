@@ -35,3 +35,12 @@ export const FULL_WIDTH_FIELDS = [
 	'DIVIDER',
 	'LABEL'
 ];
+
+export const DATA_FIELDS = [
+	'TEXT',
+	'SELECT',
+	'TABLE_DYNAMIC',
+	'TABLE_STATIC',
+	'NUMBER',
+	'DATE'
+];
