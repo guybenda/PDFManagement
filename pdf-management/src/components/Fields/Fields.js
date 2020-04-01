@@ -7,7 +7,7 @@ import Label from './Label';
 import NumberField from './NumberField';
 import DateField from './DateField';
 
-export {
+/*export {
 	DynamicTableField,
 	SelectField,
 	StaticTableField,
@@ -43,4 +43,55 @@ export const DATA_FIELDS = [
 	'TABLE_STATIC',
 	'NUMBER',
 	'DATE'
-];
+];*/
+
+export default {
+	TEXT: {
+		COMP: TextField,
+		FULL_WIDTH: false,
+		HAS_DATA: true,
+		PRINT_HEIGHT: 2
+	},
+	SELECT: {
+		COMP: SelectField,
+		FULL_WIDTH: false,
+		HAS_DATA: true,
+		PRINT_HEIGHT: 2
+	},
+	TABLE_DYNAMIC: {
+		COMP: DynamicTableField,
+		FULL_WIDTH: true,
+		HAS_DATA: true,
+		PRINT_HEIGHT: null
+	},
+	TABLE_STATIC: {
+		COMP: StaticTableField,
+		FULL_WIDTH: true,
+		HAS_DATA: true,
+		PRINT_HEIGHT: null
+	},
+	DIVIDER: {
+		COMP: Divider,
+		FULL_WIDTH: true,
+		HAS_DATA: false,
+		PRINT_HEIGHT: 2
+	},
+	LABEL: {
+		COMP: Label,
+		FULL_WIDTH: true,
+		HAS_DATA: false,
+		PRINT_HEIGHT: 2
+	},
+	NUMBER: {
+		COMP: NumberField,
+		FULL_WIDTH: false,
+		HAS_DATA: true,
+		PRINT_HEIGHT: 2
+	},
+	DATE: {
+		COMP: DateField,
+		FULL_WIDTH: false,
+		HAS_DATA: true,
+		PRINT_HEIGHT: 2
+	}
+};

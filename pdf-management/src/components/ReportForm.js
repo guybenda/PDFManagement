@@ -8,7 +8,7 @@ import Section from './Section';
 import Header from './Header';
 import ReportContext from '../ReportContext';
 import ReportTitle from './ReportTitle';
-import { DATA_FIELDS } from './Fields/Fields';
+import FIELDS from './Fields/Fields';
 import PrintView from './print/PrintView';
 
 import { saveReport } from '../api/ReportActions';
@@ -38,14 +38,12 @@ class ReportForm extends React.Component {
 	}
 
 	createInitialData(sections) {
-		const isInputField = field => DATA_FIELDS.some(f => f === field);
-
 		return sections.reduce(
 			(allSections, section) =>
 				(allSections = {
 					...allSections,
 					[section.id]: section.fields.reduce((allFields, field) => {
-						if (isInputField(field.type))
+						if (FIELDS[field.type].DATA)
 							return { ...allFields, [field.id]: null };
 						return allFields;
 					}, {})
@@ -102,7 +100,7 @@ class ReportForm extends React.Component {
 
 			return { data: sections };
 		});
-		console.log(this.state);
+		//console.log(this.state);
 	};
 
 	// second parameter is true if start period

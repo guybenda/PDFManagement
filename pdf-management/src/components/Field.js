@@ -3,32 +3,59 @@ import React from 'react';
 import {} from '@material-ui/core';
 import {} from '@material-ui/icons';
 
-import { FIELD_TO_COMPONENT, FULL_WIDTH_FIELDS } from './Fields/Fields';
+import FIELDS from './Fields/Fields';
 
 import './Field.css';
 
-function Field(props) {
-	let { type, ...fieldProps } = props.field;
+class Field extends React.Component {
+	shouldComponentUpdate = nextProps => {
+		let c = this.temp(nextProps);
+		if (c) console.log(`${this.props.field.type}: ${nextProps.data}`);
+		return c;
+	};
 
-	let CurrentField = FIELD_TO_COMPONENT[type];
+	temp = nextProps => {
+		const { data } = nextProps;
 
-	if (!CurrentField) return null;
+		if (!Array.isArray(data) || !Array.isArray(this.props.data)) {
+			return data !== this.props.data;
+		}
 
-	let classes = FULL_WIDTH_FIELDS.includes(type)
-		? 'field full-width'
-		: 'field';
+		for (const key in data) {
+			if (data[key] !== this.props.data[key]) return true;
+		}
 
-	return (
-		<div className={props.noMargin ? '' : classes}>
-			<CurrentField
-				{...fieldProps}
-				onChangeData={props.onChangeData}
-				data={props.data}
-				noMargin={props.noMargin}
-				print={props.print}
-			/>
-		</div>
-	);
+		return false;
+	};
+
+	dummy() {}
+
+	render() {
+		let { type, ...fieldProps } = this.props.field;
+
+		let CurrentField = FIELDS[type].COMP;
+
+		if (!CurrentField) return null;
+
+		let classes = FIELDS[type].FULL_WIDTH ? 'field full-width' : 'field';
+
+		return (
+			<div
+				className={
+					this.props.noMargin || this.props.print ? '' : classes
+				}
+				style={this.props.style}
+			>
+				<CurrentField
+					{...fieldProps}
+					onChangeData={this.props.onChangeData || this.dummy}
+					data={this.props.data}
+					noMargin={this.props.noMargin}
+					print={this.props.print}
+				/>
+			</div>
+		);
+	}
 }
 
 export default Field;

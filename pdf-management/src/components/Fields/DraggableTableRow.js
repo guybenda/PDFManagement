@@ -57,6 +57,7 @@ class DraggableTableRow extends React.Component {
 					data={this.props.data[cell.id]}
 					onChangeData={this.handleChange(cell.id)}
 					noMargin
+					print={this.props.print}
 				/>
 			</TableCell>
 		));

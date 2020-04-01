@@ -8,7 +8,7 @@ import {
 import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 
 import Field from './Field';
-import { FULL_WIDTH_FIELDS } from './Fields/Fields';
+import FIELDS from './Fields/Fields';
 
 import './Section.css';
 
@@ -24,7 +24,7 @@ function Section(props) {
 			/>
 		);
 
-		if (!FULL_WIDTH_FIELDS.includes(field.type)) {
+		if (!FIELDS[field.type].FULL_WIDTH) {
 			if (!groups[index]) groups[index] = [];
 			groups[index].push(fieldComponent);
 		} else {

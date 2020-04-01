@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { DatePicker } from '@material-ui/pickers';
 
-import './TextField.css';
+import './PeriodField.css';
 
 class PeriodField extends React.Component {
 	componentDidMount() {
@@ -21,9 +21,11 @@ class PeriodField extends React.Component {
 		if (this.props.print)
 			return (
 				<>
-					<div className='field-print-title'>
-						{this.props.noMargin ? '' : this.props.name}
-					</div>
+					{!this.props.noMargin && (
+						<div className='field-print-title'>
+							{this.props.name}:
+						</div>
+					)}
 					<div>{moment(this.props.data).format('MMMM YYYY')}</div>
 				</>
 			);

@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	page-break-after: always;
-	margin-top: 45%;
+	margin-top: 40%;
 }
 
 .print-title {
@@ -18,4 +18,12 @@
 
 .print-container {
 	width: 100%;
+}
+
+.print-section-title {
+	font-size: 2rem;
+	font-weight: 700;
+	grid-row: span 3;
+	margin: 0 1rem;
+	border-bottom: dashed 1px gray;
 }

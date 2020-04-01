@@ -62,6 +62,14 @@ class DynamicTableField extends React.Component {
 		this.props.onChangeData(newRows);
 	};
 
+	getTableStyle() {
+		if (!this.props.print) return;
+
+		return {
+			gridRows: `span ${this.props.data.length + 1}`
+		};
+	}
+
 	render() {
 		return (
 			<TableContainer className='table-container' component={Paper}>

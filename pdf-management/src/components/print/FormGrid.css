@@ -1,4 +1,6 @@
 .print-form {
 	display: grid;
 	grid-template-rows: repeat(25, 1fr);
+	align-items: center;
+	height: 100%;
 }

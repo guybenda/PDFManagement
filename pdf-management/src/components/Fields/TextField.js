@@ -20,9 +20,11 @@ class TextField extends React.Component {
 		if (this.props.print)
 			return (
 				<>
-					<div className='field-print-title'>
-						{this.props.noMargin ? '' : this.props.name}
-					</div>
+					{!this.props.noMargin && (
+						<div className='field-print-title'>
+							{this.props.name}:
+						</div>
+					)}
 					<div>{this.props.data}</div>
 				</>
 			);
