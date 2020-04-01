@@ -9,6 +9,7 @@ import Header from './Header';
 import ReportContext from '../ReportContext';
 import ReportTitle from './ReportTitle';
 import { DATA_FIELDS } from './Fields/Fields';
+import PrintView from './print/PrintView';
 
 import { saveReport } from '../api/ReportActions';
 
@@ -131,6 +132,10 @@ class ReportForm extends React.Component {
 		saveReport(this.context.form.id, reportData);
 	};
 
+	onPrint() {
+		window.print();
+	}
+
 	renderForm() {
 		if (!this.state.data) return null; //TODO: loader
 		return this.context.form.sections.map(section => (
@@ -148,17 +153,34 @@ class ReportForm extends React.Component {
 
 		return (
 			<>
-				<Header onSave={this.onSave} />
+				<div className='report-form-edit'>
+					<Header
+						onSave={this.onSave}
+						onPrint={this.onPrint}
+						mode='edit'
+					/>
+					{!this.state.loading && (
+						<Container
+							maxWidth='lg'
+							className='report-form-container'
+						>
+							<MuiPickersUtilsProvider utils={MomentUtils}>
+								<ReportTitle
+									onChangePeriod={this.onChangePeriod}
+									period={this.state.period}
+								/>
+								<form>{this.renderForm()}</form>
+							</MuiPickersUtilsProvider>
+						</Container>
+					)}
+				</div>
 				{!this.state.loading && (
-					<Container maxWidth='lg' className='report-form-container'>
-						<MuiPickersUtilsProvider utils={MomentUtils}>
-							<ReportTitle
-								onChangePeriod={this.onChangePeriod}
-								period={this.state.period}
-							/>
-							<form>{this.renderForm()}</form>
-						</MuiPickersUtilsProvider>
-					</Container>
+					<div className='report-form-print'>
+						<PrintView
+							data={this.state.data}
+							period={this.state.period}
+						/>
+					</div>
 				)}
 			</>
 		);

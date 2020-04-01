@@ -35,12 +35,6 @@ function Section(props) {
 		return groups;
 	}, []);
 
-	const test = fieldGroups.map((group, index) => (
-		<div className='section-group' key={index}>
-			{group}
-		</div>
-	));
-
 	return (
 		<ExpansionPanel
 			className='section'
@@ -52,19 +46,11 @@ function Section(props) {
 			</ExpansionPanelSummary>
 			<ExpansionPanelDetails>
 				<div className='section-contents'>
-					{
-						test /*props.section.fields.map(field => (
-						<Field
-							key={field.id}
-							field={field}
-							data={props.data[field.id]}
-							onChangeData={props.onChangeData(
-								props.section.id,
-								field.id
-							)}
-						/>
-							))*/
-					}
+					{fieldGroups.map((group, index) => (
+						<div className='section-group' key={index}>
+							{group}
+						</div>
+					))}
 				</div>
 			</ExpansionPanelDetails>
 		</ExpansionPanel>

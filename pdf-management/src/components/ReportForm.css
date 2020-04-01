@@ -2,3 +2,18 @@
 	margin-top: 1rem;
 	margin-bottom: 2rem;
 }
+
+@media print {
+	.report-form-edit {
+		display: none;
+	}
+	.report-form-print {
+		display: block;
+	}
+}
+
+@media screen {
+	.report-form-print {
+		display: none;
+	}
+}

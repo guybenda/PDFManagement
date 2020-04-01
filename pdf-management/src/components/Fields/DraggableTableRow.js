@@ -45,25 +45,30 @@ class DraggableTableRow extends React.Component {
 			0
 		);
 
+		let rowContent = this.props.columns.map(cell => (
+			<TableCell
+				key={cell.id}
+				style={{
+					width: `${100 * (cell.weight / totalWeight)}%`
+				}}
+			>
+				<Field
+					field={cell}
+					data={this.props.data[cell.id]}
+					onChangeData={this.handleChange(cell.id)}
+					noMargin
+				/>
+			</TableCell>
+		));
+
+		if (this.props.print) return <TableRow>{rowContent}</TableRow>;
+
 		return (
 			<SortableRow
 				index={this.props.index}
 				onDelete={this.props.onDelete}
-				value={this.props.columns.map(cell => (
-					<TableCell
-						key={cell.id}
-						style={{
-							width: `${100 * (cell.weight / totalWeight)}%`
-						}}
-					>
-						<Field
-							field={cell}
-							data={this.props.data[cell.id]}
-							onChangeData={this.handleChange(cell.id)}
-							noMargin
-						/>
-					</TableCell>
-				))}
+				print={this.props.print}
+				value={rowContent}
 			/>
 		);
 	}

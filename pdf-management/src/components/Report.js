@@ -10,7 +10,7 @@ import { getForm } from '../api/ReportActions';
 class Report extends React.Component {
 	state = {
 		form: null,
-		report: null
+		mode: null
 	};
 
 	async componentDidMount() {
@@ -31,12 +31,14 @@ class Report extends React.Component {
 		return (
 			<ReportContext.Provider value={this.state}>
 				<Switch>
-					<Route path={`${path}/edit`}>
-						<ReportForm />
-					</Route>
-					<Route path={`${path}/view`}>
-						<PdfDisplay />
-					</Route>
+					<Route
+						path={[`${path}/edit`, `${path}/edit/:reportID`]}
+						component={ReportForm}
+					></Route>
+					<Route
+						path={`${path}/view/:reportID`}
+						component={PdfDisplay}
+					></Route>
 				</Switch>
 			</ReportContext.Provider>
 		);

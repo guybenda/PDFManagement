@@ -5,3 +5,7 @@
 .field.full-width {
 	grid-column: 1 / -1;
 }
+
+.field-print-title {
+	font-weight: 600;
+}

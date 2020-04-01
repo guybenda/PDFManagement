@@ -17,6 +17,16 @@ class TextField extends React.Component {
 	};
 
 	render() {
+		if (this.props.print)
+			return (
+				<>
+					<div className='field-print-title'>
+						{this.props.noMargin ? '' : this.props.name}
+					</div>
+					<div>{this.props.data}</div>
+				</>
+			);
+
 		return (
 			<MuiTextField
 				fullWidth

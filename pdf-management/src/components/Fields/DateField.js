@@ -18,6 +18,16 @@ class DateField extends React.Component {
 	};
 
 	render() {
+		if (this.props.print)
+			return (
+				<>
+					<div className='field-print-title'>
+						{this.props.noMargin ? '' : this.props.name}
+					</div>
+					<div>{moment(this.props.data).format('l')}</div>
+				</>
+			);
+
 		return (
 			<KeyboardDatePicker
 				autoOk

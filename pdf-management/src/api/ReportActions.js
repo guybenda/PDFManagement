@@ -25,7 +25,12 @@ export const getReport = async (formID, reportID) => {
 };
 
 export const saveReport = async (formID, report) => {
+	//TODO i guess?
 	console.log(report);
+	return true;
+};
 
+export const saveDraft = async (formId, report) => {
+	console.log(report);
 	return true;
 };

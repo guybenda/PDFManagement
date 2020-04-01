@@ -18,6 +18,16 @@ class PeriodField extends React.Component {
 	};
 
 	render() {
+		if (this.props.print)
+			return (
+				<>
+					<div className='field-print-title'>
+						{this.props.noMargin ? '' : this.props.name}
+					</div>
+					<div>{moment(this.props.data).format('MMMM YYYY')}</div>
+				</>
+			);
+
 		return (
 			<DatePicker
 				autoOk

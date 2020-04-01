@@ -25,6 +25,7 @@ function Field(props) {
 				onChangeData={props.onChangeData}
 				data={props.data}
 				noMargin={props.noMargin}
+				print={props.print}
 			/>
 		</div>
 	);

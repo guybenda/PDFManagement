@@ -68,7 +68,7 @@ class DynamicTableField extends React.Component {
 				<Table className='table-dynamic' size='small'>
 					<Tableheader
 						columns={this.props.fields}
-						onAdd={this.onAddRow}
+						onAdd={this.props.print ? null : this.onAddRow}
 					/>
 					<SortableTable
 						onSortEnd={this.onSortEnd}
@@ -84,6 +84,7 @@ class DynamicTableField extends React.Component {
 									data={this.props.data[index]}
 									onChangeData={this.handleReorder}
 									onDelete={this.onDelete(index)}
+									print={this.props.print}
 								/>
 							))}
 					</SortableTable>
