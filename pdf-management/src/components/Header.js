@@ -2,7 +2,6 @@ import React from 'react';
 import { AppBar, Toolbar, IconButton, Button } from '@material-ui/core';
 import { Menu as MenuIcon, Print as PrintIcon } from '@material-ui/icons';
 
-import ReportContext from '../ReportContext';
 
 import './Header.css';
 
@@ -24,8 +23,7 @@ class Header extends React.Component {
 
 		return (
 			<div className='header'>
-				<ReportContext.Consumer>
-					{({ form }) => (
+
 						<AppBar position='static'>
 							<Toolbar className='header-toolbar'>
 								<IconButton
@@ -36,12 +34,11 @@ class Header extends React.Component {
 								>
 									<MenuIcon />
 								</IconButton>
-								<div className='header-title'>{form.name}</div>
-								{buttons}
+								{/* <div className='header-title'>{form.name}</div> */}
+								{/* {buttons} */}
 							</Toolbar>
 						</AppBar>
-					)}
-				</ReportContext.Consumer>
+				        
 			</div>
 		);
 	}

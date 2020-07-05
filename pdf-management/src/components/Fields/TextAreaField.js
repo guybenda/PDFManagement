@@ -1,11 +1,11 @@
 import React from 'react';
-import { TextField as MuiTextField } from '@material-ui/core';
+import { TextareaAutosize } from '@material-ui/core';
 import {REPORT_MODE} from '../../constants';
 import './TextField.css';
 import {editSections} from '../../actions';
 import {connect} from 'react-redux';
 
-class TextField extends React.Component {
+class TextAreaField extends React.Component {
 	handleChange = e => {
 		// Check if the field is in table 
 		if (this.props.handleChange){
@@ -29,8 +29,8 @@ class TextField extends React.Component {
 			);
 
 		return (
-			<MuiTextField
-				style={{margin:"1em 0 0 1em"}}
+			<TextareaAutosize
+				style={{width:"8rem"}}
 				disabled={this.props.mode === REPORT_MODE.view ? true : false}
 				label={this.props.noMargin ? '' : this.props.name}
 				variant={this.props.noMargin ? 'standard' : 'outlined'}
@@ -41,5 +41,5 @@ class TextField extends React.Component {
 	}
 }
 
-export default connect(null,{editSections})(TextField);
+export default connect(null,{editSections})(TextAreaField);
 

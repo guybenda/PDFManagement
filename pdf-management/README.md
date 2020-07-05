@@ -66,3 +66,16 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+
+### TO DO
+(The working example is http://localhost:3000/form/2)
+1. Add row in table 
+2. delete row in table
+3. drag row in table -> edit inSortEnd function
+4. form period does not change (at title form)
+5. adding print mode -> use '@react-pdf' library , if you need help call me :)
+6. Good luck !!
+

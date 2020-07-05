@@ -1,4 +1,4 @@
-.table-dynamic {
+/* .table-dynamic {
 	table-layout: fixed;
 }
 
@@ -11,4 +11,17 @@
 }
 .MuiInputAdornment-positionStart {
 	margin: 0 !important;
+} */
+
+.table-header {
+	display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+}
+
+.button-add-row{
+    width: 10rem;
 }

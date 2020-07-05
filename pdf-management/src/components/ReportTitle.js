@@ -3,11 +3,17 @@ import React from 'react';
 import PeriodField from './Fields/PeriodField';
 
 import './ReportTitle.css';
+import {connect} from 'react-redux';
+import {editPeriod} from '../actions';
+import moment from 'moment';
 
 class ReportTitle extends React.Component {
-	onChangePeriod = start => period => {
-		this.props.onChangePeriod(period, start);
-	};
+
+	handlePeriodChange = (time,date) =>{
+		const period = this.props.period;
+		period[time] = moment(date).format('YYYY-MM');
+		this.props.editPeriod(period);
+	}
 
 	render() {
 		return (
@@ -15,15 +21,20 @@ class ReportTitle extends React.Component {
 				<h1>דו"ח חודשי </h1>
 				<div className='report-title-period'>
 					<PeriodField
-						data={this.props.period.start}
-						onChangeData={this.onChangePeriod(true)}
+						mode={this.props.mode}
+						value={this.props.period.start}
+						handlePeriodChange={this.handlePeriodChange}
+						time='start'
+						maxDate={this.props.period.end}
 					/>
 				</div>
 				<h1> - </h1>
 				<div className='report-title-period'>
 					<PeriodField
-						data={this.props.period.end}
-						onChangeData={this.onChangePeriod(false)}
+						time='end'
+						value={this.props.period.end}
+						mode={this.props.mode}
+						handlePeriodChange={this.handlePeriodChange}
 						minDate={this.props.period.start}
 					/>
 				</div>
@@ -32,4 +43,7 @@ class ReportTitle extends React.Component {
 	}
 }
 
-export default ReportTitle;
+const mapStateToProps =({formReducer })=>{
+	return {period:formReducer.form.period}
+}
+export default connect(mapStateToProps,{editPeriod})(ReportTitle);

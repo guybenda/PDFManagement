@@ -180,6 +180,7 @@ class PrintView extends React.Component {
 
 		return (
 			<>
+
 				{this.renderCoverPage()}
 
 				{this.splitContentToPages().map((page, index) => (

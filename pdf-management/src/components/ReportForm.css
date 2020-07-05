@@ -17,3 +17,19 @@
 		display: none;
 	}
 }
+
+.section-contents{
+    display: flex;
+    flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.report-header-container{
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.report-container{
+	padding:1.5rem;
+}

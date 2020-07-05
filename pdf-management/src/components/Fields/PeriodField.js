@@ -3,18 +3,13 @@ import React from 'react';
 import moment from 'moment';
 
 import { DatePicker } from '@material-ui/pickers';
-
+import {REPORT_MODE} from '../../constants';
 import './PeriodField.css';
 
 class PeriodField extends React.Component {
-	componentDidMount() {
-		if (!this.props.value) {
-			this.props.onChangeData(moment());
-		}
-	}
 
 	handleChange = date => {
-		this.props.onChangeData(date);
+		this.props.handlePeriodChange(this.props.time,date);
 	};
 
 	render() {
@@ -33,18 +28,15 @@ class PeriodField extends React.Component {
 		return (
 			<DatePicker
 				autoOk
-				//disableToolbar
+				disabled={this.props.mode === REPORT_MODE.view ? true : false}
 				views={['year', 'month']}
 				openTo='month'
 				variant='inline'
 				minDate={this.props.minDate}
 				maxDate={this.props.maxDate}
-				//format='DD/MM/YYYY'
-				//InputAdornmentProps={{ position: 'start' }}
-				fullWidth
+				fullWidth={false}
 				label={this.props.noMargin ? '' : this.props.name}
-				inputVariant={this.props.noMargin ? 'standard' : 'outlined'}
-				value={this.props.data || moment()}
+				value={this.props.value || moment()}
 				onChange={this.handleChange}
 			/>
 		);

@@ -6,69 +6,49 @@ import {
 	Delete as DeleteIcon
 } from '@material-ui/icons';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
-
-import Field from '../Field';
-
 import './DraggableTableRow.css';
+import {FIELDS_COMPONENTS} from '../../constants';
 
 const DragHandle = SortableHandle(() => (
-	<TableCell className='table-cell-drag'>
-		<div className='table-row-drag-handle'>
+	<TableCell style={{width:"3rem"}}>
 			<DragHandleIcon />
-		</div>
 	</TableCell>
 ));
 
-const SortableRow = SortableElement(({ value, onDelete }) => (
-	<TableRow>
-		{value}
+const SortableRow = SortableElement(({ value,index }) => (
+	<TableRow key={index}>	
 		<DragHandle />
-		<TableCell className='table-cell-delete'>
-			<div className='table-row-drag-handle'>
-				<DeleteIcon
-					className='table-row-delete-icon'
-					onClick={onDelete}
+		<TableCell style={{width:"3rem"}}>
+				<DeleteIcon		
+					// onClick={onDelete}
 				/>
-			</div>
 		</TableCell>
+		{value}
 	</TableRow>
 ));
 
 class DraggableTableRow extends React.Component {
-	handleChange = id => value => {
-		this.props.onChangeData(this.props.index, id, value);
+	handleChange = (value,fieldId) => {
+		this.props.handleChangeRow(this.props.index,fieldId,value)
 	};
 
 	render() {
-		let totalWeight = this.props.columns.reduce(
-			(sum, curr) => sum + +curr.weight,
-			0
-		);
 
-		let rowContent = this.props.columns.map(cell => (
+		let rowContent = Object.keys(this.props.columns).map(cellName =>{			
+			if (cellName==="index") return ;
+			let FieldComp = FIELDS_COMPONENTS[this.props.fields[cellName].type]
+			return (
 			<TableCell
-				key={cell.id}
-				style={{
-					width: `${100 * (cell.weight / totalWeight)}%`
-				}}
+				key={cellName}
 			>
-				<Field
-					field={cell}
-					data={this.props.data[cell.id]}
-					onChangeData={this.handleChange(cell.id)}
-					noMargin
-					print={this.props.print}
-				/>
+				<FieldComp isTable={true} noMargin mode={this.props.mode} value={this.props.columns[cellName]}
+				 {...this.props.fields[cellName]} handleChange={this.handleChange}/>
 			</TableCell>
-		));
-
-		if (this.props.print) return <TableRow>{rowContent}</TableRow>;
+		)});
 
 		return (
 			<SortableRow
 				index={this.props.index}
-				onDelete={this.props.onDelete}
-				print={this.props.print}
 				value={rowContent}
 			/>
 		);

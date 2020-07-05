@@ -9,13 +9,21 @@ import './index.css';
 
 import moment from 'moment';
 import 'moment/locale/he';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './reducers';
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+
+const store = createStore(rootReducer,applyMiddleware(thunk))
 
 moment.locale('he');
 
 ReactDOM.render(
 	<BrowserRouter>
 		<RTL>
-			<App />
+			<Provider store={store}>
+				<App />
+			</Provider>
 		</RTL>
 	</BrowserRouter>,
 	document.getElementById('root')

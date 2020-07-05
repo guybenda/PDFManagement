@@ -5,7 +5,7 @@ import {} from '@material-ui/icons';
 
 function Divider(props) {
 	if (props.print) return 'TODO';
-	return <MuiDivider />;
+	return <MuiDivider style={{marginTop:"1em", width:"100%"}}/>;
 }
 
 export default Divider;

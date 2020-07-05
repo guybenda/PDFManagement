@@ -1,190 +1,82 @@
 import React from 'react';
-import { Container } from '@material-ui/core';
+import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails } from '@material-ui/core';
+import { ExpandMore } from '@material-ui/icons'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
-import moment from 'moment';
 import MomentUtils from '@date-io/moment';
-
-import Section from './Section';
-import Header from './Header';
-import ReportContext from '../ReportContext';
-import ReportTitle from './ReportTitle';
-import FIELDS from './Fields/Fields';
-import PrintView from './print/PrintView';
-
-import { saveReport } from '../api/ReportActions';
-
+import { getForm, savaReport, saveReport } from '../api/ReportActions';
 import './ReportForm.css';
-
+import { FIELDS_COMPONENTS, REPORT_MODE } from '../constants'
+import ReportTitle from './ReportTitle';
+import ReportAction from './ReportAction';
+import { connect } from 'react-redux';
+import {  saveForm,setForm } from '../actions'
 class ReportForm extends React.Component {
-	state = {
-		data: null,
-		period: {
-			start: null,
-			end: null
-		},
-		loading: true
-	};
-
+	state = {}
 	componentDidMount() {
-		// Create empty data structure for every field
-		let data = this.createInitialData(this.context.form.sections);
-
-		let period = {
-			start: moment(),
-			end: moment()
-		};
-
-		this.setState({ data, period, loading: false });
+		this.props.setForm(this.props.id)
 	}
 
-	createInitialData(sections) {
-		return sections.reduce(
-			(allSections, section) =>
-				(allSections = {
-					...allSections,
-					[section.id]: section.fields.reduce((allFields, field) => {
-						if (FIELDS[field.type].DATA)
-							return { ...allFields, [field.id]: null };
-						return allFields;
-					}, {})
-				}),
-			{}
-		);
+	getField(sectionId, field) {
+		let FieldComp = FIELDS_COMPONENTS[field.type];
+		return <FieldComp mode={this.props.mode} sectionId={sectionId} {...field} />
 	}
 
-	validateData(data) {
-		let sections = Object.keys(data).reduce((sections, sectionKey) => {
-			let section = data[sectionKey];
-
-			return {
-				...sections,
-				[sectionKey]: Object.keys(section).reduce((result, key) => {
-					let current = section[key];
-					if (
-						typeof current === 'string' ||
-						typeof current === 'number' ||
-						typeof current === 'boolean'
-					) {
-						return { ...result, [key]: current };
-					}
-
-					if (current instanceof moment) {
-						return { ...result, [key]: current.toISOString() };
-					}
-
-					if (Array.isArray(current)) {
-						return {
-							...result,
-							[key]: this.validateTable(current)
-						};
-					}
-
-					return result;
-				}, {})
-			};
-		}, {});
-
-		return sections;
+	getTitle(title) {
+		return (<div>{title}</div>)
 	}
 
-	validateTable(table) {
-		return table; //TODO
-	}
+	renderFormData(formData) {
+		return (
+			<div>
+				{this.getTitle(formData.name)}
+				{formData.sections.map(section => {
+					return (
 
-	onChangeData = (section, field) => value => {
-		this.setState(({ data }) => {
-			let sections = { ...data };
-			sections[section] = { ...sections[section] };
-
-			sections[section][field] = value;
-
-			return { data: sections };
-		});
-		//console.log(this.state);
-	};
-
-	// second parameter is true if start period
-	onChangePeriod = (newPeriod, isStart) => {
-		this.setState(({ period: prevPeriod }) => {
-			let start = moment(isStart ? newPeriod : prevPeriod.start);
-			let end = moment.max(start, isStart ? prevPeriod.end : newPeriod);
-
-			return {
-				period: {
-					start,
-					end
+					<div>
+						<ExpansionPanel
+							className='section'
+							defaultExpanded
+							key={section.id}
+						>
+							<ExpansionPanelSummary expandIcon={<ExpandMore />}>
+								<div className='section-title'>{section.title}</div>
+							</ExpansionPanelSummary>
+							<ExpansionPanelDetails>
+								<div className='section-contents'>
+									{section.fields.map(field => {
+										return this.getField(section.id, field)
+									})}
+								</div>
+							</ExpansionPanelDetails>
+						</ExpansionPanel>
+					</div>)
+				})
 				}
-			};
-		});
-	};
-
-	onSave = () => {
-		let reportData = {
-			period: {
-				start: this.state.period.start.format('YYYY-MM'),
-				end: this.state.period.end.format('YYYY-MM')
-			},
-			data: this.validateData(this.state.data)
-		};
-
-		saveReport(this.context.form.id, reportData);
-	};
-
-	onPrint() {
-		window.print();
+			</div>)
 	}
 
-	renderForm() {
-		if (!this.state.data) return null; //TODO: loader
-		return this.context.form.sections.map(section => (
-			<Section
-				key={section.id}
-				section={section}
-				data={this.state.data[section.id]}
-				onChangeData={this.onChangeData}
-			/>
-		));
-	}
+
 
 	render() {
-		if (!this.context.form) return null;
+		if (!this.props.form) return null;
 
 		return (
-			<>
-				<div className='report-form-edit'>
-					<Header
-						onSave={this.onSave}
-						onPrint={this.onPrint}
-						mode='edit'
-					/>
-					{!this.state.loading && (
-						<Container
-							maxWidth='lg'
-							className='report-form-container'
-						>
-							<MuiPickersUtilsProvider utils={MomentUtils}>
-								<ReportTitle
-									onChangePeriod={this.onChangePeriod}
-									period={this.state.period}
-								/>
-								<form>{this.renderForm()}</form>
-							</MuiPickersUtilsProvider>
-						</Container>
-					)}
-				</div>
-				{!this.state.loading && (
-					<div className='report-form-print'>
-						<PrintView
-							data={this.state.data}
-							period={this.state.period}
-						/>
+			<div className="report-container">
+				<MuiPickersUtilsProvider utils={MomentUtils}>
+					<div className="report-header-container">
+						<ReportTitle mode={this.props.mode}/>
+						<ReportAction/> 
 					</div>
-				)}
-			</>
+					{this.renderFormData(this.props.form)}
+				</MuiPickersUtilsProvider>
+			</div>
 		);
 	}
+
 }
 
-ReportForm.contextType = ReportContext;
+const mapStateToProps = ({ formReducer }) => {
+	return { ...formReducer }
+}
 
-export default ReportForm;
+export default connect(mapStateToProps, { saveForm,setForm })(ReportForm);
