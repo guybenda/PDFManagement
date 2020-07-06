@@ -1,46 +1,46 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
-import moment from 'moment';
+import moment from "moment";
 
-import { DatePicker } from '@material-ui/pickers';
-import {REPORT_MODE} from '../../constants';
-import './PeriodField.css';
+import { DatePicker } from "@material-ui/pickers";
+import { REPORT_MODE } from "../../constants";
+import "./PeriodField.css";
 
-class PeriodField extends React.Component {
+function PeriodField(props) {
+  const [date, setDate] = useState(props.date);
 
-	handleChange = date => {
-		this.props.handlePeriodChange(this.props.time,date);
-	};
+  const handleChange = (d) => {
+    setDate(d);
+    props.handleTimeChange(d);
+  };
 
-	render() {
-		if (this.props.print)
-			return (
-				<>
-					{!this.props.noMargin && (
-						<div className='field-print-title'>
-							{this.props.name}:
-						</div>
-					)}
-					<div>{moment(this.props.data).format('MMMM YYYY')}</div>
-				</>
-			);
+  //   if (props.print)
+  //     return (
+  //       <>
+  //         {!props.noMargin && (
+  //           <div className='field-print-title'>{props.name}:</div>
+  //         )}
+  //         <div>{moment(props.data).format("MMMM YYYY")}</div>
+  //       </>
+  //     );
 
-		return (
-			<DatePicker
-				autoOk
-				disabled={this.props.mode === REPORT_MODE.view ? true : false}
-				views={['year', 'month']}
-				openTo='month'
-				variant='inline'
-				minDate={this.props.minDate}
-				maxDate={this.props.maxDate}
-				fullWidth={false}
-				label={this.props.noMargin ? '' : this.props.name}
-				value={this.props.value || moment()}
-				onChange={this.handleChange}
-			/>
-		);
-	}
+  return (
+    <DatePicker
+      autoOk
+      // disabled={props.mode === REPORT_MODE.view ? true : false}
+      views={["year", "month"]}
+      openTo='month'
+      variant='inline'
+      minDate={props.minDate}
+      maxDate={props.maxDate}
+      fullWidth={false}
+      label={props.noMargin ? "" : props.name}
+      value={date || moment()}
+      onChange={handleChange}
+      minDateMessage='התאריך לא יכול להיות קטן מתאריך התחלה'
+	  maxDateMessage='התאריך לא יכול להיות גדול מתאריך סיום'
+    />
+  );
 }
 
 export default PeriodField;

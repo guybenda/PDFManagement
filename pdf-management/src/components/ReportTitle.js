@@ -9,7 +9,7 @@ import moment from 'moment';
 
 class ReportTitle extends React.Component {
 
-	handlePeriodChange = (time,date) =>{
+	handleTimeChange = (time,date) =>{
 		const period = this.props.period;
 		period[time] = moment(date).format('YYYY-MM');
 		this.props.editPeriod(period);
@@ -21,20 +21,20 @@ class ReportTitle extends React.Component {
 				<h1>דו"ח חודשי </h1>
 				<div className='report-title-period'>
 					<PeriodField
-						mode={this.props.mode}
+						// mode={this.props.mode}
 						value={this.props.period.start}
-						handlePeriodChange={this.handlePeriodChange}
-						time='start'
-						maxDate={this.props.period.end}
+						handleTimeChange={this.handleTimeChange}
+						// time='start'
+						// maxDate={this.props.period.end}
 					/>
 				</div>
 				<h1> - </h1>
 				<div className='report-title-period'>
 					<PeriodField
-						time='end'
+						// time='end'
 						value={this.props.period.end}
-						mode={this.props.mode}
-						handlePeriodChange={this.handlePeriodChange}
+						// mode={this.props.mode}
+						handleTimeChange={this.handleTimeChange}
 						minDate={this.props.period.start}
 					/>
 				</div>
