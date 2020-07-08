@@ -11,10 +11,9 @@ import "./ReportForm.css";
 import { FIELDS_COMPONENTS, REPORT_MODE } from "../constants";
 import ReportTitle from "./ReportTitle";
 import { connect } from "react-redux";
-import { saveForm, getForm } from "../actions";
+import { getForm, editSection } from "../actions";
 
 class ReportForm extends React.Component {
-  state = {};
   componentDidMount() {
     this.props.getForm(this.props.match.params.id);
   }
@@ -31,22 +30,22 @@ class ReportForm extends React.Component {
       <div>
         {formData.sections.map((section) => {
           return (
-              <ExpansionPanel
-                className='section'
-                defaultExpanded
-                key={section.id}
-              >
-                <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                    {section.title}
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                  <div className='section-contents'>
-                    {section.fields.map((field, index) => {
-                      return this.getField(section.id, field);
-                    })}
-                  </div>
-                </ExpansionPanelDetails>
-              </ExpansionPanel>
+            <ExpansionPanel
+              className='section'
+              defaultExpanded
+              key={section.id}
+            >
+              <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+                {section.title}
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <div className='section-contents'>
+                  {section.fields.map((field, index) => {
+                    return this.getField(section.id, field);
+                  })}
+                </div>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
           );
         })}
       </div>
@@ -73,4 +72,4 @@ const mapStateToProps = ({ formReducer }) => {
   return { ...formReducer };
 };
 
-export default connect(mapStateToProps, { saveForm, getForm })(ReportForm);
+export default connect(mapStateToProps, { getForm, editSection })(ReportForm);

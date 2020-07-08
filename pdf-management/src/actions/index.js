@@ -7,24 +7,24 @@ import {
 } from "./actionTypes";
 import { REPORT_MODE } from "../constants";
 import { FORMS } from "../mockData";
+import { getFormFromMock, saveFormInMock } from "../api/ReportActionsAPI";
 
-export const getForm = (id) => {
-  // Call API - need to add redux thun - dispatch
-  const form = FORMS.find((form) => form.id === parseInt(id));
-  return {
+export const getForm = (id) => async (dispatch) => {
+  const form = await getFormFromMock(id);
+  dispatch({
     type: SET_FORM,
     payload: form
-  };
+  });
 };
 
-export const saveForm = (formToSave) => {
+export const saveForm = (formToSave) => async (dispatch) => {
   console.log("save form");
-  const form = FORMS.find((form) => form.id === parseInt(formToSave.id));
-  return {
-    type: SAVE_FORM,
-    payload: form
-  };
-  // Call API - need to add redux thun - dispatch
+  // handle if false
+  if (saveFormInMock(formToSave))
+    dispatch({
+      type: SAVE_FORM,
+      payload: { form: formToSave, mode: REPORT_MODE.view }
+    });
 };
 
 export const editSection = (sectionId, fieldId, value) => {
@@ -51,6 +51,6 @@ export const toggleEditMode = (currMode, form) => {
 
   return {
     type: SET_MODE,
-    payload: { mode: newMode , editModeForm}
+    payload: { mode: newMode, editModeForm }
   };
 };

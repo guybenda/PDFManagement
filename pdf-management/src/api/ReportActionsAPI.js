@@ -1,12 +1,11 @@
-import { FORMS, REPORTS,UNITS } from '../mockData';
+import { FORMS, REPORTS, UNITS, saveForm } from "../mockData";
 
-export const getForm = async formId => {
-	console.log(FORMS)
-	let form = FORMS.find(form => form.id === parseInt(formId));
+export const getFormFromMock = async (formId) => {
+  const form = FORMS.find((form) => form.id === parseInt(formId));
 
-	if (!form) return null;
+  if (!form) return null;
 
-	return form;
+  return form;
 };
 
 // export const getReports = async formID => {
@@ -25,10 +24,8 @@ export const getForm = async formId => {
 // 	return report;
 // };
 
-export const saveForm = async (formID, report) => {
-	//TODO i guess?
-	console.log(report);
-	return true;
+export const saveFormInMock = async (formToSave) => {
+  return await saveForm(formToSave);
 };
 
 // export const saveDraft = async (formId, report) => {
@@ -36,6 +33,6 @@ export const saveForm = async (formID, report) => {
 // 	return true;
 // };
 
-export const getUnits = () =>{
-	  return UNITS    
-}
+export const getUnits = () => {
+  return UNITS;
+};

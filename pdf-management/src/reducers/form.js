@@ -54,7 +54,7 @@ export const formReducer = (state = INITIAL_STATE, action) => {
     case SAVE_FORM:
       return {
         ...state,
-        mode: REPORT_MODE.view
+        ...action.payload
       };
     default:
       return state;

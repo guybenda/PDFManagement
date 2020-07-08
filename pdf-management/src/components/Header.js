@@ -1,15 +1,24 @@
 import React from "react";
 import { AppBar, Toolbar, IconButton, Button } from "@material-ui/core";
-import { Menu as MenuIcon, Print as PrintIcon } from "@material-ui/icons";
+import {
+  Menu as MenuIcon,
+  Print as PrintIcon,
+  Delete,
+  Save,
+  Edit
+} from "@material-ui/icons";
 import { REPORT_MODE } from "../constants";
 import { toggleEditMode, saveForm } from "../actions";
-import { Delete, Save, Edit } from "@material-ui/icons";
 
 import { connect } from "react-redux";
 
 import "../index.css";
 
 class Header extends React.Component {
+  onSaveClick = () => {
+    this.props.saveForm(this.props.form);
+  };
+
   renderButtons = () => {
     if (this.props.mode === REPORT_MODE.view) {
       return (
@@ -41,7 +50,7 @@ class Header extends React.Component {
             ביטול
           </Button>
           <Button
-            onClick={this.props.saveForm}
+            onClick={this.onSaveClick}
             key='save'
             color='inherit'
             startIcon={<Save />}
