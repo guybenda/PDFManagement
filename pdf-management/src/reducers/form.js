@@ -9,6 +9,7 @@ import {
 import { REPORT_MODE } from "../constants";
 
 const INITIAL_STATE = {
+  editModeForm: null,
   form: null,
   mode: REPORT_MODE.view
 };
@@ -26,7 +27,7 @@ export const formReducer = (state = INITIAL_STATE, action) => {
         form: { ...state.form, period: action.payload }
       };
     case EDIT_FORM_SECTIONS:
-        // move logic to actions
+      // move logic to actions
       return {
         ...state,
         form: {
@@ -47,7 +48,7 @@ export const formReducer = (state = INITIAL_STATE, action) => {
     case SET_MODE:
       return {
         ...state,
-        mode: action.payload
+        ...action.payload
       };
 
     case SAVE_FORM:

@@ -1,7 +1,5 @@
-.report-header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.report-header button {
+  padding: 1vh 1vw;
 }
 
 .report-title {
@@ -29,7 +27,6 @@
 	}
 } */
 
-
 .report-container {
   padding: 1rem 1.5rem;
 }
@@ -43,7 +40,6 @@
 .no-margin-field {
   width: 10vw;
 }
-
 
 .section-contents {
   display: flex;

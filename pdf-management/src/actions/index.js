@@ -41,11 +41,16 @@ export const editPeriod = (period) => {
   };
 };
 
-export const toggleEditMode = (currMode) => {
-  const newMode =
-    currMode === REPORT_MODE.view ? REPORT_MODE.edit : REPORT_MODE.view;
+export const toggleEditMode = (currMode, form) => {
+  let newMode = REPORT_MODE.view;
+  let editModeForm = null;
+  if (currMode === REPORT_MODE.view) {
+    newMode = REPORT_MODE.edit;
+    editModeForm = form;
+  }
+
   return {
     type: SET_MODE,
-    payload: newMode
+    payload: { mode: newMode , editModeForm}
   };
 };
