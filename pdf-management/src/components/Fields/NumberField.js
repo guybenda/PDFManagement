@@ -35,7 +35,7 @@ class NumberField extends React.Component {
 
     return (
       <div>
-        {this.props.noMargin ? "" : this.props.name}
+        <div className="form-field-label">{this.props.noMargin ? "" : this.props.name}</div>
         <MuiTextField
           type='number'
           //fullWidth

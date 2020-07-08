@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField, makeStyles, Button } from "@material-ui/core";
-import PeriodField from "../Fields/PeriodField";
+import PeriodField from "../PeriodField";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import moment from "moment";
 import MomentUtils from "@date-io/moment";

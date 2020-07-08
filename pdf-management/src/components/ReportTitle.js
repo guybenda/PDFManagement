@@ -1,6 +1,6 @@
 import React from "react";
 
-import PeriodField from "./Fields/PeriodField";
+import PeriodField from "./PeriodField";
 
 import "./ReportForm.css";
 import { connect } from "react-redux";

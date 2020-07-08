@@ -35,7 +35,9 @@ class SelectField extends React.Component {
       );
     return (
       <div>
-        {this.props.noMargin ? "" : this.props.name}
+        <div className='form-field-label'>
+          {this.props.noMargin ? "" : this.props.name}
+        </div>
         <Autocomplete
           options={this.props.values}
           onChange={this.handleChange}

@@ -35,7 +35,9 @@ class TextField extends React.Component {
 
     return (
       <div>
-        {this.props.noMargin ? "" : this.props.name}
+        <div className='form-field-label'>
+          {this.props.noMargin ? "" : this.props.name}
+        </div>
         <MuiTextField
           disabled={this.props.mode === REPORT_MODE.view ? true : false}
           className={this.props.noMargin ? "no-margin-field" : "form-field"}

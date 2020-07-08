@@ -1,18 +1,18 @@
-.report-form-container {
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+.report-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .report-title {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .report-title-period {
-	margin: 1vh 2vw;
-	width: 10rem;
+  margin: 1vh 2vw;
+  width: 10rem;
 }
-
 
 /* @media print {
 	.report-form-edit {
@@ -29,18 +29,6 @@
 	}
 } */
 
-.section-contents {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: -webkit-fill-available;
-}
-
-.report-header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
 .report-container {
   padding: 1rem 1.5rem;
@@ -51,12 +39,26 @@
   width: 20vw;
 }
 
+/* table field */
 .no-margin-field {
   width: 10vw;
 }
 
+
+.section-contents {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: -webkit-fill-available;
+}
+
+/* each row in the form */
 .section-contents > div {
   display: flex;
   align-items: center;
   padding: 0 1vw;
+}
+
+.section-contents .form-field-label {
+  min-width: 10vw;
 }

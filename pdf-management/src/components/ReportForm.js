@@ -7,7 +7,6 @@ import {
 import { ExpandMore } from "@material-ui/icons";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import MomentUtils from "@date-io/moment";
-// import { getForm, savaReport, saveForm } from "../api/ReportActionsAPI";
 import "./ReportForm.css";
 import { FIELDS_COMPONENTS, REPORT_MODE } from "../constants";
 import ReportTitle from "./ReportTitle";
@@ -38,7 +37,7 @@ class ReportForm extends React.Component {
                 key={section.id}
               >
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                  <div >{section.title}</div>
+                    {section.title}
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                   <div className='section-contents'>
