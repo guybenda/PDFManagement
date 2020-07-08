@@ -28,8 +28,8 @@ const SortableRow = SortableElement(({ value,index }) => (
 ));
 
 class DraggableTableRow extends React.Component {
-	handleChange = (value,fieldId) => {
-		this.props.handleChangeRow(this.props.index,fieldId,value)
+	onRowDragged = (value,fieldId) => {
+		this.props.onRowDragged(this.props.index,fieldId,value)
 	};
 
 	render() {
@@ -41,8 +41,8 @@ class DraggableTableRow extends React.Component {
 			<TableCell
 				key={cellName}
 			>
-				<FieldComp isTable={true} noMargin mode={this.props.mode} value={this.props.columns[cellName]}
-				 {...this.props.fields[cellName]} handleChange={this.handleChange}/>
+				<FieldComp noMargin mode={this.props.mode} value={this.props.columns[cellName]}
+				 {...this.props.fields[cellName]} handleChange={this.onRowDragged}/>
 			</TableCell>
 		)});
 

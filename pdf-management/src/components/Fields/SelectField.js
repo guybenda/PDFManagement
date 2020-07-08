@@ -4,8 +4,7 @@ import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import {} from "@material-ui/icons";
 import { REPORT_MODE } from "../../constants";
-import "./SelectField.css";
-import { editSections } from "../../actions";
+import { editSection } from "../../actions";
 import { connect } from "react-redux";
 
 class SelectField extends React.Component {
@@ -14,7 +13,7 @@ class SelectField extends React.Component {
     if (this.props.handleChange) {
       this.props.handleChange(newVal, this.props.id, this.props.sectionId);
     } else {
-      this.props.editSections(this.props.sectionId, this.props.id, newVal);
+      this.props.editSection(this.props.sectionId, this.props.id, newVal);
     }
   };
 
@@ -35,24 +34,26 @@ class SelectField extends React.Component {
         </>
       );
     return (
-      <Autocomplete
-        options={this.props.values}
-        onChange={this.handleChange}
-        getOptionLabel={(option) => option.title}
-        value={value}
-        size={this.props.isTable ? "small" : "medium"}
-        style={{ width: this.props.isTable ? "10vw" : "20vw" }}
-        disabled={this.props.mode === REPORT_MODE.view ? true : false}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label={this.props.noMargin ? "" : this.props.name}
-            variant={this.props.noMargin ? "standard" : "outlined"}
-          />
-        )}
-      />
+      <div>
+        {this.props.noMargin ? "" : this.props.name}
+        <Autocomplete
+          options={this.props.values}
+          onChange={this.handleChange}
+          getOptionLabel={(option) => option.title}
+          value={value}
+          className={this.props.noMargin ? "no-margin-field" : "form-field"}
+          size={this.props.noMargin ? "small" : "medium"}
+          disabled={this.props.mode === REPORT_MODE.view ? true : false}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              variant={this.props.noMargin ? "standard" : "outlined"}
+            />
+          )}
+        />
+      </div>
     );
   }
 }
 
-export default connect(null, { editSections })(SelectField);
+export default connect(null, { editSection })(SelectField);

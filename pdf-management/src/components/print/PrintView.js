@@ -6,7 +6,7 @@ import FormGrid from './FormGrid';
 import FIELDS from '../Fields/Fields';
 
 import './PrintView.css';
-import Field from '../Field';
+import Field from './Field';
 
 const PAGE_SIZE = 25;
 const TITLE_HEIGHT = 4;

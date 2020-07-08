@@ -3,6 +3,17 @@
   margin-bottom: 2rem;
 }
 
+.report-title {
+	display: flex;
+	align-items: center;
+}
+
+.report-title-period {
+	margin: 1vh 2vw;
+	width: 10rem;
+}
+
+
 /* @media print {
 	.report-form-edit {
 		display: none;
@@ -35,6 +46,17 @@
   padding: 1rem 1.5rem;
 }
 
-.section-contents .MuiFormControl-root {
-  margin: 1vh 1vw;
+.form-field {
+  margin: 1vh 2vw !important;
+  width: 20vw;
+}
+
+.no-margin-field {
+  width: 10vw;
+}
+
+.section-contents > div {
+  display: flex;
+  align-items: center;
+  padding: 0 1vw;
 }

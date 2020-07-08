@@ -1,8 +1,7 @@
 import React from "react";
 import { TextField as MuiTextField } from "@material-ui/core";
 import { REPORT_MODE } from "../../constants";
-import "./TextField.css";
-import { editSections } from "../../actions";
+import { editSection } from "../../actions";
 import { connect } from "react-redux";
 
 class TextField extends React.Component {
@@ -15,7 +14,7 @@ class TextField extends React.Component {
         this.props.sectionId
       );
     } else {
-      this.props.editSections(
+      this.props.editSection(
         this.props.sectionId,
         this.props.id,
         e.target.value
@@ -36,10 +35,10 @@ class TextField extends React.Component {
 
     return (
       <div>
+        {this.props.noMargin ? "" : this.props.name}
         <MuiTextField
           disabled={this.props.mode === REPORT_MODE.view ? true : false}
-          label={this.props.noMargin ? "" : this.props.name}
-          style={{ width: this.props.isTable ? "10vw" : "15vw" }}
+          className={this.props.noMargin ? "no-margin-field" : "form-field"}
           variant={this.props.noMargin ? "standard" : "outlined"}
           value={this.props.value || ""}
           onChange={this.handleChange}
@@ -49,4 +48,4 @@ class TextField extends React.Component {
   }
 }
 
-export default connect(null, { editSections })(TextField);
+export default connect(null, { editSection })(TextField);

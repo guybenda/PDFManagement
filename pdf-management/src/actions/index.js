@@ -4,7 +4,8 @@ import {
   EDIT_FORM_PERIOD,
   SET_MODE,
   SAVE_FORM
-} from "./constants";
+} from "./actionTypes";
+import { REPORT_MODE } from "../constants";
 import { FORMS } from "../mockData";
 
 export const getForm = (id) => {
@@ -26,7 +27,7 @@ export const saveForm = (formToSave) => {
   // Call API - need to add redux thun - dispatch
 };
 
-export const editSections = (sectionId, fieldId, value) => {
+export const editSection = (sectionId, fieldId, value) => {
   return {
     type: EDIT_FORM_SECTIONS,
     payload: { sectionId, fieldId, value }
@@ -40,9 +41,11 @@ export const editPeriod = (period) => {
   };
 };
 
-export const setMode = (mode) => {
+export const toggleEditMode = (currMode) => {
+  const newMode =
+    currMode === REPORT_MODE.view ? REPORT_MODE.edit : REPORT_MODE.view;
   return {
     type: SET_MODE,
-    payload: mode
+    payload: newMode
   };
 };

@@ -4,7 +4,7 @@ import {
   EDIT_FORM_PERIOD,
   SET_MODE,
   SAVE_FORM
-} from "../actions/constants";
+} from "../actions/actionTypes";
 
 import { REPORT_MODE } from "../constants";
 
@@ -26,6 +26,7 @@ export const formReducer = (state = INITIAL_STATE, action) => {
         form: { ...state.form, period: action.payload }
       };
     case EDIT_FORM_SECTIONS:
+        // move logic to actions
       return {
         ...state,
         form: {

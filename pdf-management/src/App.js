@@ -5,7 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import SearchForm from "./components/Search/SearchForm";
 import Header from "./components/Header";
-import ReportFormContainer from "./components/ReportFormContainer";
+import ReportForm from "./components/ReportForm";
 
 function App() {
   return (
@@ -14,7 +14,8 @@ function App() {
       <div style={{ paddingTop: "4rem" }}>
         <Switch>
           <Route exact path='/' component={SearchForm} />
-          <Route path='/form/:id' component={ReportFormContainer} />
+           {/* only report form with redux*/}
+          <Route path='/form/:id' component={ReportForm} />
           <Route path='*'>
             <NotFound />
           </Route>

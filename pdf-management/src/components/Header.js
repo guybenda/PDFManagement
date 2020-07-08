@@ -2,16 +2,20 @@ import React from "react";
 import { AppBar, Toolbar, IconButton, Button } from "@material-ui/core";
 import { Menu as MenuIcon, Print as PrintIcon } from "@material-ui/icons";
 import ReportActionButtons from "./ReportActionButtons";
+import { toggleEditMode, saveForm } from "../actions";
 
-import { setMode } from "../actions";
 import { connect } from "react-redux";
 
-import "./Header.css";
+import "../index.css";
 
 class Header extends React.Component {
   render() {
     let buttons = [
-      <ReportActionButtons />,
+      <ReportActionButtons
+        toggleEditMode={this.props.toggleEditMode}
+        saveForm={this.props.saveForm}
+        mode={this.props.mode}
+      />,
       <Button key='print' color='inherit' onClick={this.props.onPrint}>
         <PrintIcon />
       </Button>
@@ -28,7 +32,7 @@ class Header extends React.Component {
     return (
       <div>
         <AppBar position='fixed'>
-          <Toolbar className='header-toolbar'>
+          <Toolbar style={{ backgroundColor: "#192e4d" }}>
             <IconButton
               edge='start'
               color='inherit'
@@ -47,7 +51,8 @@ class Header extends React.Component {
     );
   }
 }
+
 const mapStateToProps = ({ formReducer }) => {
-  return { form: formReducer.form };
+  return { ...formReducer };
 };
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { toggleEditMode, saveForm })(Header);

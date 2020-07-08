@@ -6,7 +6,7 @@ import { SortableContainer } from 'react-sortable-hoc';
 import DraggableTableRow from './DraggableTableRow';
 import './DynamicTableField.css';
 import {connect} from 'react-redux';
-import {editSections} from '../../actions'
+import {editSection} from '../../actions'
 import Label from './Label';
 
 const SortableTable = SortableContainer(({ children }) => {
@@ -19,7 +19,7 @@ class DynamicTableField extends React.Component {
 			return result;
 		},{});
 	}
-	handleChangeRow = (rowIndex,fieldId, value) =>{
+	onRowDragged = (rowIndex,fieldId, value) =>{
 		let newData = this.props.value.map((row)=>{
 			if(row.index === rowIndex){
 				row[fieldId] = value;
@@ -28,12 +28,12 @@ class DynamicTableField extends React.Component {
 			return row;
 		});
 
-		this.props.editSections(this.props.sectionId,this.props.id,newData)
+		this.props.editSection(this.props.sectionId,this.props.id,newData)
 	}
 	renderBody = () =>{
 		const fieldsConverted = this.convertFields();
 		return this.props.value.map((item)=>{
-			return (<DraggableTableRow handleChangeRow={this.handleChangeRow}
+			return (<DraggableTableRow onRowDragged={this.onRowDragged}
 									   columns={item}
 									   index={item.index}
 									   fields={fieldsConverted}
@@ -68,7 +68,7 @@ class DynamicTableField extends React.Component {
 	onAddRow =  ()=>{        
 		const newVal = this.props.value;
 		newVal.push({});		  
-		this.props.editSections(this.props.sectionId,this.props.id,newVal)
+		this.props.editSection(this.props.sectionId,this.props.id,newVal)
 	}
 	renderTable = () => {
 		return (                
@@ -97,4 +97,4 @@ class DynamicTableField extends React.Component {
 	}
 }
 
-export default connect(null,{editSections})(DynamicTableField);
+export default connect(null,{editSection})(DynamicTableField);

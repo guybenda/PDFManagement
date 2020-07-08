@@ -4,9 +4,8 @@ import moment from 'moment';
 
 import { KeyboardDatePicker } from '@material-ui/pickers';
 
-import './TextField.css';
 import { REPORT_MODE } from '../../constants';
-import {editSections} from '../../actions';
+import {editSection} from '../../actions';
 import {connect} from 'react-redux';
 class DateField extends React.Component {
 	componentDidMount() {
@@ -20,7 +19,7 @@ class DateField extends React.Component {
 		if (this.props.handleChange){
 			this.props.handleChange(date,this.props.id,this.props.sectionId);
 		} else {
-			this.props.editSections(this.props.sectionId,this.props.id,date);
+			this.props.editSection(this.props.sectionId,this.props.id,date);
 		}
 	};
 
@@ -46,7 +45,7 @@ class DateField extends React.Component {
 				disableToolbar
 				variant='inline'
 				format='DD/MM/YYYY'
-				size={this.props.isTable ? 'small' : 'medium'}
+				size={this.props.noMargin ? 'small' : 'medium'}
 				InputAdornmentProps={{ position: 'start' }}
 				fullWidth
 				label={this.props.noMargin ? '' : this.props.name}
@@ -58,4 +57,4 @@ class DateField extends React.Component {
 	}
 }
 
-export default connect(null,{editSections})(DateField);
+export default connect(null,{editSection})(DateField);

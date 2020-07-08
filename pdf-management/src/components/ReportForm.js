@@ -11,14 +11,13 @@ import MomentUtils from "@date-io/moment";
 import "./ReportForm.css";
 import { FIELDS_COMPONENTS, REPORT_MODE } from "../constants";
 import ReportTitle from "./ReportTitle";
-import ReportActionButtons from "./ReportActionButtons";
 import { connect } from "react-redux";
 import { saveForm, getForm } from "../actions";
 
 class ReportForm extends React.Component {
   state = {};
   componentDidMount() {
-    this.props.getForm(this.props.id);
+    this.props.getForm(this.props.match.params.id);
   }
 
   getField(sectionId, field) {

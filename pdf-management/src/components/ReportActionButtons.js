@@ -1,18 +1,11 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import { REPORT_MODE } from "../constants";
-import { Delete, Save, Edit } from "@material-ui/icons";
-import { connect } from "react-redux";
-import { setMode, saveForm } from "../actions";
+import { Edit } from "@material-ui/icons";
 
 class ReportActionButtons extends React.Component {
   toggleMode = () => {
-    console.log("toggle mode ", this.props.mode);
-    const newMode =
-      this.props.mode === REPORT_MODE.view
-        ? REPORT_MODE.edit
-        : REPORT_MODE.view;
-    this.props.setMode(newMode);
+    this.props.toggleEditMode(this.props.mode);
   };
 
   render() {
@@ -30,20 +23,10 @@ class ReportActionButtons extends React.Component {
     } else {
       return (
         <>
-          <Button
-            onClick={this.toggleMode}
-            color='inherit'
-            key='cancel'
-            // endIcon={<Delete />}
-          >
+          <Button onClick={this.toggleMode} color='inherit' key='cancel'>
             ביטול
           </Button>
-          <Button
-            onClick={this.props.saveForm}
-            key='save'
-            color='inherit'
-            // endIcon={<Save />}
-          >
+          <Button onClick={this.props.saveForm} key='save' color='inherit'>
             שמירה
           </Button>
         </>
@@ -52,10 +35,4 @@ class ReportActionButtons extends React.Component {
   }
 }
 
-const mapStateToProps = ({ formReducer }) => {
-  return { mode: formReducer.mode };
-};
-
-export default connect(mapStateToProps, { setMode, saveForm })(
-  ReportActionButtons
-);
+export default ReportActionButtons;

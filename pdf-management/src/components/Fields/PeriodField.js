@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 
 import { DatePicker } from "@material-ui/pickers";
-import "./PeriodField.css";
 
 function PeriodField(props) {
   const [date, setDate] = useState(props.date);
