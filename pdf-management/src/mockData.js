@@ -106,7 +106,7 @@ export const FORMS = [
   },
   {
     id: 2,
-    name: "",
+    name: "שם כלשהו",
     period: {
       start: "2020-07",
       end: "2020-08"
@@ -145,6 +145,10 @@ export const FORMS = [
             name: "בדיקה 3",
             type: "NUMBER",
             value: 3
+          },
+          {
+            id: "TEST_DIVIDER2",
+            type: "DIVIDER"
           },
           {
             id: "TEST_TABLE",

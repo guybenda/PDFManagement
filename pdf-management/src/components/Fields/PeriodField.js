@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import moment from "moment";
 
 import { DatePicker } from "@material-ui/pickers";
-import { REPORT_MODE } from "../../constants";
 import "./PeriodField.css";
 
 function PeriodField(props) {
@@ -11,7 +10,8 @@ function PeriodField(props) {
 
   const handleChange = (d) => {
     setDate(d);
-    props.handleTimeChange(d);
+    // time = if its start or end time
+    props.handleTimeChange(props.time, d);
   };
 
   //   if (props.print)
@@ -27,7 +27,7 @@ function PeriodField(props) {
   return (
     <DatePicker
       autoOk
-      // disabled={props.mode === REPORT_MODE.view ? true : false}
+      disabled={props.disabled}
       views={["year", "month"]}
       openTo='month'
       variant='inline'
@@ -38,7 +38,7 @@ function PeriodField(props) {
       value={date || moment()}
       onChange={handleChange}
       minDateMessage='התאריך לא יכול להיות קטן מתאריך התחלה'
-	  maxDateMessage='התאריך לא יכול להיות גדול מתאריך סיום'
+      maxDateMessage='התאריך לא יכול להיות גדול מתאריך סיום'
     />
   );
 }

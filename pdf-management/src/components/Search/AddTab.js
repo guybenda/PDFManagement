@@ -23,12 +23,10 @@ function AddTab(props) {
     }
   };
 
-  const onChangeStart = (date) => {
-    setStartDate(date);
-  };
-
-  const onChangeEnd = (date) => {
-    setEndDate(date);
+  const onChangeDate = (time, date) => {
+    console.log(time, date);
+    if (time === "start") setStartDate(date);
+    else setEndDate(date);
   };
 
   const renderDates = () => {
@@ -39,15 +37,17 @@ function AddTab(props) {
           <div className='add-tab-date'>
             <PeriodField
               date={startDate}
-              handleTimeChange={onChangeStart}
+              handleTimeChange={onChangeDate}
               name={"תאריך התחלה"}
+              time='start'
             />
           </div>
           <div className='add-tab-date'>
             <PeriodField
               className='add-tab-date'
-              handleTimeChange={onChangeEnd}
+              handleTimeChange={onChangeDate}
               date={endDate}
+              time='end'
               minDate={startDate}
               name={"תאריך סיום"}
             />
@@ -59,7 +59,6 @@ function AddTab(props) {
   };
 
   const renderAddButton = () => {
-    console.log(endDate, startDate, moment(endDate).isBefore(startDate));
     if (
       endDate == null ||
       endDate === "" ||

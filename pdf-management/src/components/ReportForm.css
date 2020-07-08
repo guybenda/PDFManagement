@@ -1,35 +1,40 @@
 .report-form-container {
-	margin-top: 1rem;
-	margin-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
-@media print {
+/* @media print {
 	.report-form-edit {
 		display: none;
 	}
 	.report-form-print {
 		display: block;
 	}
-}
+} */
 
-@media screen {
+/* @media screen {
 	.report-form-print {
 		display: none;
 	}
+} */
+
+.section-contents {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: -webkit-fill-available;
 }
 
-.section-contents{
-    display: flex;
-    flex-direction: row;
-	flex-wrap: wrap;
+.report-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.report-header-container{
-	display:flex;
-	align-items: center;
-	justify-content: space-between;
+.report-container {
+  padding: 1rem 1.5rem;
 }
 
-.report-container{
-	padding:1.5rem;
+.section-contents .MuiFormControl-root {
+  margin: 1vh 1vw;
 }

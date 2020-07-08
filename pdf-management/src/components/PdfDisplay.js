@@ -1,44 +1,44 @@
-import React from 'react';
+// import React from 'react';
 
-import {} from '@material-ui/core';
-import {} from '@material-ui/icons';
+// import {} from '@material-ui/core';
+// import {} from '@material-ui/icons';
 
-import ReportContext from '../ReportContext';
-import Header from './Header';
+// import ReportContext from '../ReportContext';
+// import Header from './Header';
 
-import { getReport } from '../api/ReportActions';
+// import { getReport } from '../api/ReportActionsAPI';
 
-import './PdfDisplay.css';
+// import './PdfDisplay.css';
 
-class PdfDisplay extends React.Component {
-	state = {
-		report: null,
-		loading: true
-	};
+// class PdfDisplay extends React.Component {
+// 	state = {
+// 		report: null,
+// 		loading: true
+// 	};
 
-	async componentDidMount() {
-		console.log(this.props);
-		let { reportID } = this.props.match.params;
+// 	async componentDidMount() {
+// 		console.log(this.props);
+// 		let { reportID } = this.props.match.params;
 
-		let report = await getReport(this.context.form.id, +reportID);
+// 		let report = await getReport(this.context.form.id, +reportID);
 
-		this.setState({
-			report,
-			loading: false
-		});
-	}
+// 		this.setState({
+// 			report,
+// 			loading: false
+// 		});
+// 	}
 
-	render() {
-		if (this.state.loading) return null;
-		return (
-			<>
-				<Header />
-				{JSON.stringify(this.state.report)}
-			</>
-		);
-	}
-}
+// 	render() {
+// 		if (this.state.loading) return null;
+// 		return (
+// 			<>
+// 				<Header />
+// 				{JSON.stringify(this.state.report)}
+// 			</>
+// 		);
+// 	}
+// }
 
-PdfDisplay.contextType = ReportContext;
+// PdfDisplay.contextType = ReportContext;
 
-export default PdfDisplay;
+// export default PdfDisplay;
