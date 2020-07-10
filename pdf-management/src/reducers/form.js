@@ -56,7 +56,6 @@ export const formReducer = (state = INITIAL_STATE, action) => {
                 if (field.id === action.payload.tableId) {
                   // append to array or create if table is empty
                   field.value ? field.value.push({}) : (field.value = [{}]);
-                  console.log("reducer - field.value", field.value);
                 }
                 return field;
               });
@@ -66,14 +65,8 @@ export const formReducer = (state = INITIAL_STATE, action) => {
         }
       };
     case SET_MODE:
-      console.log(state);
       // if switching to edit mode
       if (action.payload.mode === REPORT_MODE.edit) {
-        console.log({
-          ...state,
-          ...action.payload,
-          formInitialState: cloneDeep(state.form)
-        });
         // save copy in case of cancel changes
         return {
           ...state,
@@ -81,11 +74,7 @@ export const formReducer = (state = INITIAL_STATE, action) => {
           formInitialState: cloneDeep(state.form)
         };
       } else if (action.payload.mode === REPORT_MODE.view) {
-        console.log({
-          ...state,
-          ...action.payload,
-          form: { ...state.formInitialState }
-        }); // cancel changes
+        // cancel changes
         return {
           ...state,
           ...action.payload,

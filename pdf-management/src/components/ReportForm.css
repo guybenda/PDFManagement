@@ -38,9 +38,11 @@
 
 /* table field */
 .no-margin-field {
-  width: 8vw;
+  width: 10vw;
 }
-
+.MuiTableCell-root {
+  padding: 1rem 0 !important;
+}
 .section-contents {
   display: flex;
   flex-direction: column;
