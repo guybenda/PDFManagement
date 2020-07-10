@@ -8,30 +8,11 @@ export const getFormFromMock = async (formId) => {
   return form;
 };
 
-// export const getReports = async formID => {
-// 	if (!(await getForm(formID))) return null;
-
-// 	return REPORTS[formID];
-// };
-
-// export const getReport = async (formID, reportID) => {
-// 	if (!(await getForm(formID))) return null;
-
-// 	let report = REPORTS[formID].find(report => (report.id = reportID));
-
-// 	if (!report) return null;
-
-// 	return report;
-// };
 
 export const saveFormInMock = async (formToSave) => {
   return await saveForm(formToSave);
 };
 
-// export const saveDraft = async (formId, report) => {
-// 	console.log(report);
-// 	return true;
-// };
 
 export const getUnits = () => {
   return UNITS;

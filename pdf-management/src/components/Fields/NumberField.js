@@ -1,25 +1,10 @@
 import React from "react";
 import { TextField as MuiTextField } from "@material-ui/core";
 import { REPORT_MODE } from "../../constants";
-import { editSection } from "../../actions";
-import { connect } from "react-redux";
 
 class NumberField extends React.Component {
-  handleChange = (e) => {
-    // Check if the field is in table
-    if (this.props.handleChange) {
-      this.props.handleChange(
-        e.target.value,
-        this.props.id,
-        this.props.sectionId
-      );
-    } else {
-      this.props.editSection(
-        this.props.sectionId,
-        this.props.id,
-        e.target.value
-      );
-    }
+  handleNumberChange = (e) => {
+    this.props.handleChange(e.target.value);
   };
 
   render() {
@@ -35,20 +20,22 @@ class NumberField extends React.Component {
 
     return (
       <div>
-        <div className="form-field-label">{this.props.noMargin ? "" : this.props.name}</div>
+        <div className='form-field-label'>
+          {this.props.noMargin ? "" : this.props.name}
+        </div>
         <MuiTextField
           type='number'
           //fullWidth
           className={this.props.noMargin ? "no-margin-field" : "form-field"}
           size={this.props.noMargin ? "small" : "medium"}
-          disabled={this.props.mode === REPORT_MODE.view ? true : false}
+          disabled={this.props.disabled}
           variant={this.props.noMargin ? "standard" : "outlined"}
           value={this.props.value || ""}
-          onChange={this.handleChange}
+          onChange={this.handleNumberChange}
         />
       </div>
     );
   }
 }
 
-export default connect(null, { editSection })(NumberField);
+export default NumberField;

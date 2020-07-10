@@ -3,7 +3,8 @@ import {
   EDIT_FORM_SECTIONS,
   EDIT_FORM_PERIOD,
   SET_MODE,
-  SAVE_FORM
+  SAVE_FORM,
+  ADD_TABLE_ROW
 } from "./actionTypes";
 import { REPORT_MODE } from "../constants";
 import { FORMS } from "../mockData";
@@ -13,12 +14,11 @@ export const getForm = (id) => async (dispatch) => {
   const form = await getFormFromMock(id);
   dispatch({
     type: SET_FORM,
-    payload: form
+    payload: { form }
   });
 };
 
 export const saveForm = (formToSave) => async (dispatch) => {
-  console.log("save form");
   // handle if false
   if (saveFormInMock(formToSave))
     dispatch({
@@ -34,6 +34,14 @@ export const editSection = (sectionId, fieldId, value) => {
   };
 };
 
+export const addTableRow = (sectionId, tableId) => {
+  return {
+    type: ADD_TABLE_ROW,
+    payload: { sectionId, tableId }
+  };
+};
+
+// period = {'start' : ""}
 export const editPeriod = (period) => {
   return {
     type: EDIT_FORM_PERIOD,
@@ -41,16 +49,9 @@ export const editPeriod = (period) => {
   };
 };
 
-export const toggleEditMode = (currMode, form) => {
-  let newMode = REPORT_MODE.view;
-  let editModeForm = null;
-  if (currMode === REPORT_MODE.view) {
-    newMode = REPORT_MODE.edit;
-    editModeForm = form;
-  }
-
+export const setMode = (mode) => {
   return {
     type: SET_MODE,
-    payload: { mode: newMode, editModeForm }
+    payload: { mode }
   };
 };

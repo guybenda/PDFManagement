@@ -1,14 +1,8 @@
 import React from "react";
 import { AppBar, Toolbar, IconButton, Button } from "@material-ui/core";
-import {
-  Menu as MenuIcon,
-  Print as PrintIcon,
-  Delete,
-  Save,
-  Edit
-} from "@material-ui/icons";
+import { Menu, Print, Delete, Save, Edit } from "@material-ui/icons";
 import { REPORT_MODE } from "../constants";
-import { toggleEditMode, saveForm } from "../actions";
+import { setMode, saveForm } from "../actions";
 
 import { connect } from "react-redux";
 
@@ -25,7 +19,7 @@ class Header extends React.Component {
         <>
           <Button
             onClick={() => {
-              this.props.toggleEditMode(this.props.mode, this.props.form);
+              this.props.setMode(REPORT_MODE.edit);
             }}
             key='edit'
             color='inherit'
@@ -34,7 +28,7 @@ class Header extends React.Component {
             עבור למצב עריכה
           </Button>
           <Button key='print' color='inherit' onClick={this.props.onPrint}>
-            <PrintIcon />
+            <Print />
           </Button>
         </>
       );
@@ -42,7 +36,10 @@ class Header extends React.Component {
       return (
         <>
           <Button
-            onClick={this.toggleMode}
+            // to change arrow func
+            onClick={() => {
+              this.props.setMode(REPORT_MODE.view);
+            }}
             color='inherit'
             key='cancel'
             startIcon={<Delete />}
@@ -72,7 +69,7 @@ class Header extends React.Component {
             aria-label='menu'
             onClick={() => console.log("menu")}
           >
-            <MenuIcon />
+            <Menu />
           </IconButton>
           <div className='header-title'>
             {this.props.form != null ? this.props.form.name : ""}
@@ -89,4 +86,4 @@ class Header extends React.Component {
 const mapStateToProps = ({ formReducer }) => {
   return { ...formReducer };
 };
-export default connect(mapStateToProps, { toggleEditMode, saveForm })(Header);
+export default connect(mapStateToProps, { setMode, saveForm })(Header);

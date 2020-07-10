@@ -3,16 +3,14 @@ import React from "react";
 import PeriodField from "./PeriodField";
 
 import "./ReportForm.css";
-import { connect } from "react-redux";
-import { editPeriod } from "../actions";
 import moment from "moment";
 import { REPORT_MODE } from "../constants";
 
 class ReportTitle extends React.Component {
   handleTimeChange = (time, date) => {
     const period = this.props.period;
-    period[time] = moment(date).format("YYYY-MM"); // לשנות העתק לא את המקור
-    // this.props.editPeriod(period);
+    period[time] = moment(date).format("YYYY-MM");
+    this.props.editPeriod(period);
   };
 
   render() {
@@ -35,7 +33,7 @@ class ReportTitle extends React.Component {
             time='end'
             value={this.props.period.end}
             handleTimeChange={this.handleTimeChange}
-            minDate={this.props.period.start}
+            minDate={this.props.period.start} // sometimes tricky
           />
         </div>
       </div>
@@ -43,7 +41,4 @@ class ReportTitle extends React.Component {
   }
 }
 
-const mapStateToProps = ({ formReducer }) => {
-  return { period: formReducer.form.period, mode: formReducer.mode };
-};
-export default connect(mapStateToProps, { editPeriod })(ReportTitle);
+export default ReportTitle;

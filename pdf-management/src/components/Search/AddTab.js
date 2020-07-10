@@ -24,7 +24,6 @@ function AddTab(props) {
   };
 
   const onChangeDate = (time, date) => {
-    console.log(time, date);
     if (time === "start") setStartDate(date);
     else setEndDate(date);
   };
@@ -69,8 +68,9 @@ function AddTab(props) {
           צור
         </Button>
       );
+    // TODO : need to handle the api
     return (
-      <Link to={`/`}>
+      <Link to={`/form/0`}>
         <Button variant='contained' color='primary' startIcon={<Add />}>
           צור
         </Button>

@@ -11,7 +11,7 @@ import "./ReportForm.css";
 import { FIELDS_COMPONENTS, REPORT_MODE } from "../constants";
 import ReportTitle from "./ReportTitle";
 import { connect } from "react-redux";
-import { getForm, editSection } from "../actions";
+import { getForm, editSection, editPeriod } from "../actions";
 
 class ReportForm extends React.Component {
   componentDidMount() {
@@ -21,7 +21,14 @@ class ReportForm extends React.Component {
   getField(sectionId, field) {
     let FieldComp = FIELDS_COMPONENTS[field.type];
     return (
-      <FieldComp mode={this.props.mode} sectionId={sectionId} {...field} />
+      <FieldComp
+        disabled={this.props.mode === REPORT_MODE.view ? true : false}
+        sectionId={sectionId}
+        {...field}
+        handleChange={(value) => {
+          this.props.editSection(sectionId, field.id, value);
+        }}
+      />
     );
   }
 
@@ -40,7 +47,7 @@ class ReportForm extends React.Component {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <div className='section-contents'>
-                  {section.fields.map((field, index) => {
+                  {section.fields.map((field) => {
                     return this.getField(section.id, field);
                   })}
                 </div>
@@ -54,12 +61,15 @@ class ReportForm extends React.Component {
 
   render() {
     if (!this.props.form) return null;
-
     return (
       <div className='report-container'>
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <div className='report-header-container'>
-            <ReportTitle mode={this.props.mode} />
+            <ReportTitle
+              period={this.props.form.period}
+              editPeriod={this.props.editPeriod}
+              mode={this.props.mode}
+            />
           </div>
           {this.renderFormData(this.props.form)}
         </MuiPickersUtilsProvider>
@@ -72,4 +82,6 @@ const mapStateToProps = ({ formReducer }) => {
   return { ...formReducer };
 };
 
-export default connect(mapStateToProps, { getForm, editSection })(ReportForm);
+export default connect(mapStateToProps, { getForm, editSection, editPeriod })(
+  ReportForm
+);

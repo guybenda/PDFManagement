@@ -3,7 +3,7 @@ import Divider from "./components/Fields/Divider";
 import TextField from "./components/Fields/TextField";
 import Label from "./components/Fields/Label";
 import NumberField from "./components/Fields/NumberField";
-import DynamicTableField from "./components/Fields/DynamicTableField";
+import DynamicTable from "./components/Fields/DynamicTable";
 import SelectField from "./components/Fields/SelectField";
 import TextAreaField from "./components/Fields/TextAreaField";
 
@@ -14,7 +14,7 @@ export const FIELDS_COMPONENTS = {
   TEXT: TextField,
   LABEL: Label,
   NUMBER: NumberField,
-  TABLE_DYNAMIC: DynamicTableField,
+  TABLE_DYNAMIC: DynamicTable,
   SELECT: SelectField,
   TEXT_AREA: TextAreaField
 };

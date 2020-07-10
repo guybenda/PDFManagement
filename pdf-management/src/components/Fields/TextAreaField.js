@@ -1,25 +1,10 @@
 import React from "react";
 import { TextareaAutosize } from "@material-ui/core";
 import { REPORT_MODE } from "../../constants";
-import { editSection } from "../../actions";
-import { connect } from "react-redux";
 
 class TextAreaField extends React.Component {
-  handleChange = (e) => {
-    // Check if the field is in table
-    if (this.props.handleChange) {
-      this.props.handleChange(
-        e.target.value,
-        this.props.id,
-        this.props.sectionId
-      );
-    } else {
-      this.props.editSection(
-        this.props.sectionId,
-        this.props.id,
-        e.target.value
-      );
-    }
+  handleTextAreaChange = (e) => {
+    this.props.handleChange(e.target.value);
   };
 
   render() {
@@ -33,21 +18,24 @@ class TextAreaField extends React.Component {
         </>
       );
 
-      // handle when not in table
+    // handle when not in table
     return (
       <div>
-        {this.props.noMargin ? "" : this.props.name}
-
+        <div className='form-field-label'>
+          {this.props.noMargin ? "" : this.props.name}
+        </div>
         <TextareaAutosize
-          style={{ width: "8rem" }}
-          disabled={this.props.mode === REPORT_MODE.view ? true : false}
+          rowsMin={this.props.noMargin ? 1 : 3}
+          rowsMax={this.props.noMargin ? 3 : 7}
+          className={this.props.noMargin ? "no-margin-field" : "form-field"}
+          disabled={this.props.disabled}
           variant={this.props.noMargin ? "standard" : "outlined"}
           value={this.props.value || ""}
-          onChange={this.handleChange}
+          onChange={this.handleTextAreaChange}
         />
       </div>
     );
   }
 }
 
-export default connect(null, { editSection })(TextAreaField);
+export default TextAreaField;

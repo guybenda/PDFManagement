@@ -38,7 +38,7 @@
 
 /* table field */
 .no-margin-field {
-  width: 10vw;
+  width: 8vw;
 }
 
 .section-contents {
@@ -56,5 +56,14 @@
 }
 
 .section-contents .form-field-label {
+  max-width: 40vw;
   min-width: 10vw;
+}
+
+.table-row-disabled-icon {
+  opacity: 0.5;
+}
+.table-row-icon:hover {
+  color: #000000c0;
+  cursor: pointer;
 }
