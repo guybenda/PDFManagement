@@ -10,7 +10,7 @@
     "@material-ui/pickers": "^3.2.10",
     "@react-pdf/renderer": "^1.6.8",
     "array-move": "^2.2.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "jss-rtl": "^0.3.0",
     "lodash": "^4.17.19",
     "material-table": "^1.60.0",
